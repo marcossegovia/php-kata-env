@@ -1,0 +1,7 @@
+default:
+    suites:
+        example:
+            paths:
+                - "%paths.base%/tests/Integration/Example/Feature"
+            contexts:
+                - KataTest\Integration\Example\Context\ExampleContext
