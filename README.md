@@ -3,8 +3,7 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status](https://travis-ci.org/uvinum/php-kata-env.svg?branch=master)](https://travis-ci.org/uvinum/php-kata-env)
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
-[![Total Downloads][ico-downloads]][link-downloads]
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/uvinum/php-kata-env/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/uvinum/php-kata-env/?branch=master)
 
 Uvinum skeleton repository to start with our coding katas.
 
