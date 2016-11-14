@@ -1,7 +1,7 @@
 #php-kata-env
 
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
+[![Build Status](https://travis-ci.org/uvinum/php-kata-env.svg?branch=master)](https://travis-ci.org/uvinum/php-kata-env)
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
