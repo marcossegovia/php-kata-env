@@ -17,6 +17,9 @@
         <testsuite name="Application Test Suite">
             <directory>tests</directory>
         </testsuite>
+        <testsuite name="bowling">
+            <directory>tests/Unit/BowlingKata</directory>
+        </testsuite>
     </testsuites>
 
     <filter>

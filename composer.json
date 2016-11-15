@@ -40,6 +40,7 @@
     },
     "scripts": {
         "test-unit": "phpunit",
+        "test-unit-bowling": "phpunit --testsuite bowling",
         "test-integration": "php vendor/bin/behat --suite example",
         "format": "phpcbf --standard=psr2 src/"
     },
