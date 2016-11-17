@@ -4,6 +4,7 @@ namespace Kata\BowlingKata;
 
 final class BowlingGame
 {
+    const FRAME_SCORE = 10;
     const MAX_FRAMES = 10;
 
     private $total_game_score = 0;
@@ -16,87 +17,72 @@ final class BowlingGame
     {
         $this->rolls = $rolls;
 
+        $this->checkRolls();
+
+        return $this->calculateTotalScore();
+    }
+
+    private function checkRolls()
+    {
         foreach ($this->rolls as $roll_order => $roll_mark)
         {
-            $roll_score = $this->calculateRollScore($roll_mark, $roll_order);
-
-            $this->frames[$this->current_frame][] = $roll_score;
+            $current_roll_full_score              = $this->calculateFullRollScore($roll_mark, $roll_order);
+            $this->frames[$this->current_frame][] = $current_roll_full_score;
 
             if ($this->current_frame < self::MAX_FRAMES)
             {
-                $this->total_game_score += $roll_score;
+                $this->total_game_score += $current_roll_full_score;
             }
 
-            if ($this->isSecondTryInFrame() || $this->isStrike($roll_mark) || $this->isSpare($roll_mark))
+            if ($this->isSecondTryInFrame() || RollValue::STRIKE == $roll_mark || RollValue::SPARE == $roll_mark)
             {
                 $this->current_frame++;
             }
 
             $this->current_roll++;
         }
-
-        return $this->score();
     }
 
-    private function calculateRollScore($roll_mark, $roll_order)
+    private function calculateSimpleRollScore($roll_mark, $roll_order):int
     {
-        if ($this->isPartialScoring($roll_mark))
+        if ($roll_mark == RollValue::SPARE)
         {
-            $current_roll_simple_score = $roll_mark;
+            return self::FRAME_SCORE - $this->rolls[$roll_order - 1];
+        }
+
+        return RollValue::fromChar($roll_mark)->value();
+    }
+
+    private function calculateFullRollScore($roll_mark, $roll_order)
+    {
+        $current_roll_simple_score = $this->calculateSimpleRollScore($roll_mark, $roll_order);
+
+        if (!in_array($roll_mark, [RollValue::SPARE, RollValue::STRIKE]))
+        {
+            return $current_roll_simple_score;
+        }
+
+        if ($roll_mark == RollValue::SPARE)
+        {
+            $current_roll_simple_score += (!empty($this->rolls[$roll_order + 1])) ? $this->calculateSimpleRollScore($this->rolls[$roll_order + 1], $roll_order + 1) : 0;
 
             return $current_roll_simple_score;
         }
 
-        if ($this->isSpare($roll_mark))
+        if ($roll_mark == RollValue::STRIKE)
         {
-            $current_roll_simple_score = 10 - $this->rolls[$roll_order - 1];
+            $current_roll_simple_score += (!empty($this->rolls[$roll_order + 1])) ? $this->calculateSimpleRollScore($this->rolls[$roll_order + 1], $roll_order + 1) : 0;
+            $current_roll_simple_score += (!empty($this->rolls[$roll_order + 2])) ? $this->calculateSimpleRollScore($this->rolls[$roll_order + 2], $roll_order + 2) : 0;
 
-            if ($roll_order != $this->current_roll)
-            {
-                return $current_roll_simple_score;
-            }
-
-            $next_roll_score_1 = (!empty($this->rolls[$roll_order + 1])) ? $this->calculateRollScore($this->rolls[$roll_order + 1], $roll_order + 1) : 0;
-
-            return $current_roll_simple_score + $next_roll_score_1;
+            return $current_roll_simple_score;
         }
 
-        if ($this->isStrike($roll_mark))
-        {
-            $current_roll_simple_score = 10;
-
-            if ($roll_order != $this->current_roll)
-            {
-                return $current_roll_simple_score;
-            }
-
-            $next_roll_score_1 = (!empty($this->rolls[$roll_order + 1])) ? $this->calculateRollScore($this->rolls[$roll_order + 1], $roll_order + 1) : 0;
-            $next_roll_score_2 = (!empty($this->rolls[$roll_order + 2])) ? $this->calculateRollScore($this->rolls[$roll_order + 2], $roll_order + 2) : 0;
-
-            return $current_roll_simple_score + $next_roll_score_1 + $next_roll_score_2;
-        }
-
-        return 0;
+        throw new \InvalidArgumentException($roll_mark . ' is an invalid roll.');
     }
 
-    private function score() : int
+    private function calculateTotalScore() : int
     {
         return $this->total_game_score;
-    }
-
-    private function isPartialScoring($try)
-    {
-        return is_int($try);
-    }
-
-    private function isSpare($try)
-    {
-        return '/' == $try;
-    }
-
-    private function isStrike($try)
-    {
-        return 'X' == $try;
     }
 
     private function isSecondTryInFrame()
