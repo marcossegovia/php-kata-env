@@ -19,9 +19,9 @@ class BowlingTest extends \PHPUnit_Framework_TestCase
 		return array(
 			'testThrowing9PinsInFirstFrame'								=> array( array( 9, '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' ), 9 ),
 			'testThrowing5PinsInFirstFrame'								=> array( array( 5, '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' ), 5 ),
-//			'testThrowing12PinsInFirstFrameWithoutStrike'				=> array( array( 9, 3, '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' ), 12 ),
-//			'testThrowing12PinsInSecondFrameWithoutStrike'				=> array( array( '-', '-', 9, 3, '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' ), 12 ),
-//			'testThrowing12PinsBetweenFirstAndSecondFrameWithoutStrike'	=> array( array( 9, '-', '-', 3, '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' ), 12 ),
+			'testThrowing12PinsInFirstFrameWithoutStrike'				=> array( array( 9, 3, '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' ), 12 ),
+			'testThrowing12PinsInSecondFrameWithoutStrike'				=> array( array( '-', '-', 9, 3, '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' ), 12 ),
+			'testThrowing12PinsBetweenFirstAndSecondFrameWithoutStrike'	=> array( array( 9, '-', '-', 3, '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' ), 12 ),
 //			'testThrowingSpareInFirstFrameAnd2PinsInSecondIs14'			=> array( array( 5, '/', 2, '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' ), 14 ),
 //			'testThrowingSpareInFirstFrameAnd2And3PinsInSecondIs17'		=> array( array( 5, '/', 2, 3, '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' ), 17 ),
 //			'testOneStrikeInFirstThrowIs10'								=> array( array( 'X', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' ), 10 ),
