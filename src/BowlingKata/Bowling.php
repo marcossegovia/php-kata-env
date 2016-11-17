@@ -6,6 +6,6 @@ final class Bowling
 {
     public function __invoke(array $frames) : int
     {
-        return 9;
+        return $frames[0];
     }
 }
