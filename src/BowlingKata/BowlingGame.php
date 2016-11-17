@@ -2,7 +2,7 @@
 
 namespace Kata\BowlingKata;
 
-final class Bowling
+final class BowlingGame
 {
     /** @var int */
     private $score = 0;

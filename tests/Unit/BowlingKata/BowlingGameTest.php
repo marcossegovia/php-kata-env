@@ -2,11 +2,11 @@
 
 namespace KataTest\Unit\BowlingKata;
 
-use Kata\BowlingKata\Bowling;
+use Kata\BowlingKata\BowlingGame;
 
-class BowlingTest extends \PHPUnit_Framework_TestCase
+class BowlingGameTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var Bowling */
+    /** @var BowlingGame */
     private $bowling;
 
     /**
@@ -43,7 +43,7 @@ class BowlingTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldMatchTheSpecifiedFrames($frames, $expectedScore)
     {
-        $this->bowling = new Bowling();
+        $this->bowling = new BowlingGame();
         $this->assertEquals($expectedScore, $this->bowling->__invoke($frames));
     }
 }
