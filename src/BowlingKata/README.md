@@ -1,5 +1,5 @@
 #Bowling-kata
-We can briefly summarize the scoring for this form of bowling:
+Podemos resumir las pautas de la Bowling kata en los siguientes puntos:
 
 * Cada juego son 10 turnos (`frames`).
 * En cada frame, el jugador tiene 2 oportunidades(`tries`) para tirar todos los bolos.
