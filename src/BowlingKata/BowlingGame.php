@@ -4,73 +4,76 @@ namespace Kata\BowlingKata;
 
 final class BowlingGame
 {
-    /** @var int */
-    private $score = 0;
+    const MAX_FRAMES = 10;
 
+    private $total_game_score = 0;
     private $frames = [];
-
     private $current_frame = 0;
+    private $rolls = [];
+    private $current_roll = 0;
 
-    private $tries = [];
-
-    private $current_try = 0;
-
-    public function __invoke(array $tries) : int
+    public function __invoke(array $rolls) : int
     {
-        $this->tries = $tries;
+        $this->rolls = $rolls;
 
-        foreach ($this->tries as $try_order => $try_value)
+        foreach ($this->rolls as $roll_order => $roll_mark)
         {
-            $try_score = $this->calculateTryScore($try_value, $try_order);
+            $roll_score = $this->calculateRollScore($roll_mark, $roll_order);
 
-            $this->frames[$this->current_frame][] = $try_score;
+            $this->frames[$this->current_frame][] = $roll_score;
 
-            if ($this->current_frame < 10)
+            if ($this->current_frame < self::MAX_FRAMES)
             {
-                $this->score += $try_score;
+                $this->total_game_score += $roll_score;
             }
 
-            if ($this->isSecondTryInFrame() || $this->isStrike($try_value) || $this->isSpare($try_value))
+            if ($this->isSecondTryInFrame() || $this->isStrike($roll_mark) || $this->isSpare($roll_mark))
             {
                 $this->current_frame++;
             }
 
-            $this->current_try++;
+            $this->current_roll++;
         }
 
         return $this->score();
     }
 
-    private function calculateTryScore($try_value, $try_order)
+    private function calculateRollScore($roll_mark, $roll_order)
     {
-        if ($this->isPartialScoring($try_value))
+        if ($this->isPartialScoring($roll_mark))
         {
-            $current_frame_simple_score = $try_value;
+            $current_roll_simple_score = $roll_mark;
 
-            return $current_frame_simple_score;
+            return $current_roll_simple_score;
         }
 
-        if ($this->isSpare($try_value))
+        if ($this->isSpare($roll_mark))
         {
-            $current_frame_simple_score = 10 - $this->tries[$try_order - 1];
+            $current_roll_simple_score = 10 - $this->rolls[$roll_order - 1];
 
-            if ($try_order != $this->current_try) return $current_frame_simple_score;
+            if ($roll_order != $this->current_roll)
+            {
+                return $current_roll_simple_score;
+            }
 
-            $next_try_score_1 = (!empty($this->tries[$try_order + 1])) ? $this->calculateTryScore($this->tries[$try_order + 1], $try_order + 1) : 0;
+            $next_roll_score_1 = (!empty($this->rolls[$roll_order + 1])) ? $this->calculateRollScore($this->rolls[$roll_order + 1], $roll_order + 1) : 0;
 
-            return $current_frame_simple_score + $next_try_score_1;
+            return $current_roll_simple_score + $next_roll_score_1;
         }
 
-        if ($this->isStrike($try_value))
+        if ($this->isStrike($roll_mark))
         {
-            $current_frame_simple_score = 10;
+            $current_roll_simple_score = 10;
 
-            if ($try_order != $this->current_try) return $current_frame_simple_score;
+            if ($roll_order != $this->current_roll)
+            {
+                return $current_roll_simple_score;
+            }
 
-            $next_try_score_1 = (!empty($this->tries[$try_order + 1])) ? $this->calculateTryScore($this->tries[$try_order + 1], $try_order + 1) : 0;
-            $next_try_score_2 = (!empty($this->tries[$try_order + 2])) ? $this->calculateTryScore($this->tries[$try_order + 2], $try_order + 2) : 0;
+            $next_roll_score_1 = (!empty($this->rolls[$roll_order + 1])) ? $this->calculateRollScore($this->rolls[$roll_order + 1], $roll_order + 1) : 0;
+            $next_roll_score_2 = (!empty($this->rolls[$roll_order + 2])) ? $this->calculateRollScore($this->rolls[$roll_order + 2], $roll_order + 2) : 0;
 
-            return $current_frame_simple_score + $next_try_score_1 + $next_try_score_2;
+            return $current_roll_simple_score + $next_roll_score_1 + $next_roll_score_2;
         }
 
         return 0;
@@ -78,12 +81,7 @@ final class BowlingGame
 
     private function score() : int
     {
-        return $this->score;
-    }
-
-    private function isEmpty($try)
-    {
-        return '-' == $try;
+        return $this->total_game_score;
     }
 
     private function isPartialScoring($try)
