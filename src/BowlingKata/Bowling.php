@@ -10,9 +10,23 @@ final class Bowling
 
         foreach ($tries as $num_try => $try)
         {
+
+            if ($this->isAFrameWithSpare($tries, $num_try))
+            {
+                $current_punctuation = 10 + $tries[$num_try+2];
+
+                $punctuation+=$current_punctuation;
+                continue;
+            }
+
             $punctuation+= $try;
         }
 
         return $punctuation;
+    }
+
+    private function isAFrameWithSpare($tries, $num_try)
+    {
+        return isset($tries[$num_try+1]) && $tries[$num_try+1]  === '/';
     }
 }
