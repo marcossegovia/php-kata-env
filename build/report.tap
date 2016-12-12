@@ -1,0 +1,11 @@
+TAP version 13
+ok 1 - KataTest\Unit\ExampleTest::shouldExpectAJellyTimeWhenGreeting
+not ok 2 - Failure: KataTest\GildedRoseKata\GildedRoseTest::foo
+  ---
+  message: 'Failed asserting that two strings are equal.'
+  severity: fail
+  data:
+      got: foo
+      expected: fixme
+  ...
+1..2
