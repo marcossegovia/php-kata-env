@@ -34,7 +34,7 @@ c) Item `Backstage passes` que igual que `Aged Brie`, **INCREMENTA** su `quality
 lo siguiente:
 * `sellIn` <= 10 : `quality` aumenta x2.
 * `sellIn` <= 5 : `quality` aumenta x3.
-* `sellIn` < 0 : `quality` tiene valor 0.
+* `sellIn` <= 0 : `quality` tiene valor 0.
 
 
 ##Qué hay que hacer?
