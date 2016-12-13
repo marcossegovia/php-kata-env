@@ -14,7 +14,7 @@ a) Todos los items tienen una fecha de venta (`SellIn`), que especifica el núme
 
 b) Todos los items tienen una calidad (`Quality`), que especifica el valor que tiene un item.
 
-c) Al final del día el sistema reduce los valores para los dos valores de cada item.
+c) Al final del día el sistema reduce en una unidad los dos valores de cada item.
 
 2. **Puntos especificos**:
 
