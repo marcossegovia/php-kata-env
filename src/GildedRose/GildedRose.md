@@ -8,7 +8,7 @@ La pieza `gilded_rose.js` utiliza un array de items distintos añadidos préviam
 
 Cosas a tener en cuenta para realizar la Kata:
 
-1. **Puntos generales**:
+1.**Puntos generales**:
 
 a) Todos los items tienen una fecha de venta (`SellIn`), que especifica el número de días que tenemos para vender el item.
 
@@ -16,7 +16,7 @@ b) Todos los items tienen una calidad (`Quality`), que especifica el valor que t
 
 c) Al final del día el sistema reduce en una unidad los dos valores de cada item.
 
-2. **Puntos especificos**:
+2.**Puntos especificos**:
 
 a) Si `sellIn` ha pasado, la calidad se reduce el doble `(sellIn <= 0 ? $quality-= 2 : $quality--;)`.
 
@@ -24,7 +24,7 @@ b) La `quality` de un item **NUNCA** puede ser negativa.
 
 c) La `quality` de un item **NUNCA** puede sobrepasar 50.
 
-3. **Excepciones**:
+3.**Excepciones**:
 
 a) Item `Aged Brie` **INCREMENTA** la `quality` cuanto más viejo es (cuánto menor es la fecha de venta, `sellIn`).
 
