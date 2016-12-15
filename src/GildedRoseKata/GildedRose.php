@@ -22,21 +22,7 @@ class GildedRose
             }
             else
             {
-                if ($item->quality < 50)
-                {
-                    $item->quality = $item->quality + 1;
-                    if ($item->name == 'Backstage passes to a TAFKAL80ETC concert')
-                    {
-                        if ($item->sell_in < 11)
-                        {
-                            $this->increaseQualityByOneUnitWhenQualitySmallerThanFifty($item);
-                        }
-                        if ($item->sell_in < 6)
-                        {
-                            $this->increaseQualityByOneUnitWhenQualitySmallerThanFifty($item);
-                        }
-                    }
-                }
+                $this->incrementQuality($item);
             }
 
             if ($item->name != 'Sulfuras, Hand of Ragnaros')
@@ -81,6 +67,35 @@ class GildedRose
             {
                 $item->quality = $item->quality - 1;
             }
+        }
+    }
+
+    public function incrementQuality($item): void
+    {
+        if ($item->quality >= 50)
+        {
+            return;
+        }
+
+        $item->quality = $item->quality + 1;
+
+        if ($item->name !== 'Backstage passes to a TAFKAL80ETC concert')
+        {
+            return;
+        }
+
+        $this->incrementQualityForBackstagePasses($item);
+    }
+
+    private function incrementQualityForBackstagePasses($item): void
+    {
+        if ($item->sell_in < 11)
+        {
+            $this->increaseQualityByOneUnitWhenQualitySmallerThanFifty($item);
+        }
+        if ($item->sell_in < 6)
+        {
+            $this->increaseQualityByOneUnitWhenQualitySmallerThanFifty($item);
         }
     }
 }
