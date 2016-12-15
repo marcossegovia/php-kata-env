@@ -1,7 +1,7 @@
 <?php
 namespace Kata\GildedRoseKata;
 
-class ConjuredItem extends BaseItem
+final class ConjuredItem extends BaseItem
 {
     const ITEM_NAME = 'Conjured Mana Cake';
 

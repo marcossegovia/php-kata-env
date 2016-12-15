@@ -1,14 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: albertgarcia
- * Date: 15/12/16
- * Time: 10:04
- */
 
 namespace Kata\GildedRoseKata;
 
-class ItemFactory
+final class ItemFactory
 {
     public static function fromItem(Item $item)
     {

@@ -1,7 +1,7 @@
 <?php
 namespace Kata\GildedRoseKata;
 
-class SulfurasItem extends BaseItem
+final class SulfurasItem extends BaseItem
 {
     const ITEM_NAME = 'Sulfuras, Hand of Ragnaros';
 
