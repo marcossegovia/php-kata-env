@@ -15,16 +15,16 @@ class ItemFactory
         switch($item->name)
         {
             case AgedBrieItem::ITEM_NAME:
-                return new AgedBrieItem($item->sell_in, $item->quality);
+                return new AgedBrieItem($item);
                 break;
             case SulfurasItem::ITEM_NAME:
-                return new SulfurasItem($item->sell_in, $item->quality);
+                return new SulfurasItem($item);
                 break;
             case BackstagePassItem::ITEM_NAME:
-                return new BackstagePassItem($item->sell_in, $item->quality);
+                return new BackstagePassItem($item);
                 break;
             default:
-                return new BaseItem($item->name, $item->sell_in, $item->quality);
+                return new BaseItem($item);
         }
     }
 }

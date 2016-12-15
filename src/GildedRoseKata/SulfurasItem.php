@@ -5,8 +5,13 @@ class SulfurasItem extends BaseItem
 {
     const ITEM_NAME = 'Sulfuras, Hand of Ragnaros';
 
-    public function __construct($sell_in, $quality)
+    public function __construct(Item $an_item)
     {
-        parent::__construct(self::ITEM_NAME, $sell_in, $quality);
+        parent::__construct($an_item);
+    }
+
+    public function updateQualityByDayPassed()
+    {
+        return;
     }
 }
