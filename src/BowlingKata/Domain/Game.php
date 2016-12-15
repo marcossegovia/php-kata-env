@@ -60,14 +60,19 @@ final class Game
         $current_roll_pointer = key(current($this->rolls));
         if ($roll->type()->isSpare() && !empty($this->rolls[$current_roll_pointer + 1])) {
             $roll->increaseScore($this->rolls[$current_roll_pointer + 1]->score());
+
+            return;
+        }
+
+        if ($roll->type()->isStrike() && !empty($this->rolls[$current_roll_pointer + 2])) {
+            $roll->increaseScore($this->rolls[$current_roll_pointer + 1]->score());
+            $roll->increaseScore($this->rolls[$current_roll_pointer + 2]->score());
+
+            return;
         }
 
         if ($roll->type()->isStrike() && !empty($this->rolls[$current_roll_pointer + 1])) {
             $roll->increaseScore($this->rolls[$current_roll_pointer + 1]->score());
-        }
-
-        if ($roll->type()->isStrike() && !empty($this->rolls[$current_roll_pointer + 2])) {
-            $roll->increaseScore($this->rolls[$current_roll_pointer + 2]->score());
         }
     }
 }
