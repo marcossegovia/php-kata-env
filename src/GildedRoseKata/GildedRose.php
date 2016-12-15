@@ -16,6 +16,8 @@ class GildedRose
     {
         foreach ($this->items as $item)
         {
+            $this->factory_method($item);
+
             if ($item->name != 'Aged Brie' and $item->name != 'Backstage passes to a TAFKAL80ETC concert')
             {
                 $this->decrementQualityOneUnitIfItemNameIsNotSulfuras($item);
@@ -97,6 +99,26 @@ class GildedRose
         {
             $this->increaseQualityByOneUnitWhenQualitySmallerThanFifty($item);
         }
+    }
+
+    private function factory_method($item)
+    {
+        if ($item->name == BackstagePassesItem::NAME)
+        {
+            $new_item = BackstagePassesItem::createBackstagePasses($item->sell_in, $item->quality);
+        }
+        elseif ($item->name == AgedBrieItem::NAME)
+        {
+            $new_item = AgedBrieItem::createAgedBrieItem($item->sell_in, $item->quality);
+        }
+        elseif ($item->name == SulfurasItem::NAME)
+        {
+            $new_item = SulfurasItem::createSulfurasItem($item->sell_in, $item->quality);
+        }else{
+            $new_item = $item;
+        }
+
+        return $new_item;
     }
 }
 
