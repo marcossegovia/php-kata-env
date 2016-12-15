@@ -2,18 +2,15 @@
 
 namespace Kata\GildedRoseKata;
 
-class BackstagePassesItem extends Item
+class BackstagePassesItem
 {
     public $name;
-    public $sell_in;
-    public $quality;
+    public $item;
 
     const NAME = "Backstage passes to a TAFKAL80ETC concert";
 
-    public static function createBackstagePasses($sell_in, $quality)
+    public static function createBackstagePasses($item)
     {
-        return new self(self::NAME, $sell_in, $quality);
+        return new self(self::NAME, $item);
     }
-
-
 }

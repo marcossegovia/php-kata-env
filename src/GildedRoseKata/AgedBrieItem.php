@@ -2,17 +2,16 @@
 
 namespace Kata\GildedRoseKata;
 
-class AgedBrieItem extends Item
+class AgedBrieItem
 {
     public $name;
-    public $sell_in;
-    public $quality;
+    public $item;
 
     const NAME = "Aged Brie";
 
-    public static function createAgedBrieItem($sell_in, $quality)
+    public static function createAgedBrieItem($item)
     {
-        return new self(self::NAME, $sell_in, $quality);
+        return new self(self::NAME, $item);
     }
 
 

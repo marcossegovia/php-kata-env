@@ -16,7 +16,7 @@ class GildedRose
     {
         foreach ($this->items as $item)
         {
-            $this->factory_method($item);
+            $new_item = $this->factory_method($item);
 
             if ($item->name != 'Aged Brie' and $item->name != 'Backstage passes to a TAFKAL80ETC concert')
             {
@@ -105,15 +105,15 @@ class GildedRose
     {
         if ($item->name == BackstagePassesItem::NAME)
         {
-            $new_item = BackstagePassesItem::createBackstagePasses($item->sell_in, $item->quality);
+            $new_item = BackstagePassesItem::createBackstagePasses($item);
         }
         elseif ($item->name == AgedBrieItem::NAME)
         {
-            $new_item = AgedBrieItem::createAgedBrieItem($item->sell_in, $item->quality);
+            $new_item = AgedBrieItem::createAgedBrieItem($item);
         }
         elseif ($item->name == SulfurasItem::NAME)
         {
-            $new_item = SulfurasItem::createSulfurasItem($item->sell_in, $item->quality);
+            $new_item = SulfurasItem::createSulfurasItem($item);
         }else{
             $new_item = $item;
         }

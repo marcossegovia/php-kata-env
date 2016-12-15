@@ -2,16 +2,15 @@
 
 namespace Kata\GildedRoseKata;
 
-final class SulfurasItem extends Item
+final class SulfurasItem
 {
     public $name;
-    public $sell_in;
-    public $quality;
+    public $item;
 
     const NAME = "Sulfuras, Hand of Ragnaros";
 
-    public static function createSulfurasItem($sell_in, $quality)
+    public static function createSulfurasItem($item)
     {
-        return new self(self::NAME, $sell_in, $quality);
+        return new self(self::NAME, $item);
     }
 }
