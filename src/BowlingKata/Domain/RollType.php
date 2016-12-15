@@ -15,7 +15,7 @@ final class RollType
         $this->type = $a_type;
     }
 
-    public static function fromMark($a_mark) : self
+    public static function fromMark($a_mark) : RollType
     {
         if (self::EMPTY == $a_mark) {
             return new self('empty');
