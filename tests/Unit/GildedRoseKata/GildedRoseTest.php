@@ -62,6 +62,22 @@ class GildedRoseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider conjuredItemExamplesProvider
+     * @test
+     */
+    public function conjuredItemShouldDecreaseDoubleQualityAsDaysPass(
+        $a_conjured_item,
+        $days_to_pass,
+        $expected_quality,
+        $expected_sellin
+    ) {
+        $this->givenAnItem($a_conjured_item);
+        $this->thenGildedRoseIsBuilt();
+        $this->whenSomeDaysPass($days_to_pass);
+        $this->itemShouldMatch($expected_quality, $expected_sellin);
+    }
+
+    /**
      * @dataProvider defaultItemExamplesProvider
      * @test
      */
@@ -123,6 +139,16 @@ class GildedRoseTest extends \PHPUnit_Framework_TestCase
             [new Item('Backstage passes to a TAFKAL80ETC concert', 10, 49), 1, 50, 9],
             [new Item('Backstage passes to a TAFKAL80ETC concert', 5, 49), 1, 50, 4],
             [new Item('Backstage passes to a TAFKAL80ETC concert', 3, 10), 1, 13, 2]
+        ];
+    }
+
+    public function conjuredItemExamplesProvider()
+    {
+        return [
+            [new Item('Conjured Mana Cake', 5, 10), 1, 8, 4],
+            [new Item('Conjured Mana Cake', 5, 10), 5, 0, 0],
+            [new Item('Conjured Mana Cake', 5, 4), 2, 0, 3],
+            [new Item('Conjured Mana Cake', 10, 3), 5, 0, 5]
         ];
     }
 

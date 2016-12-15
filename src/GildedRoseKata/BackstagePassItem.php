@@ -4,13 +4,7 @@ namespace Kata\GildedRoseKata;
 class BackstagePassItem extends BaseItem
 {
     const ITEM_NAME = 'Backstage passes to a TAFKAL80ETC concert';
-
-    protected $degrade_with_time = false;
-
-    public function __construct(Item $an_item)
-    {
-        parent::__construct($an_item);
-    }
+    const DEGRADE_WITH_TIME = false;
 
     protected function getQualityMagnitudeForNextUpdate()
     {

@@ -10,10 +10,10 @@ namespace Kata\GildedRoseKata;
 
 class BaseItem
 {
+    const DEGRADE_WITH_TIME = true;
+
     /** @var Item */
     protected $item;
-
-    protected $degrade_with_time = true;
 
     public function __construct(Item $an_item)
     {
@@ -28,11 +28,11 @@ class BaseItem
     public function updateQualityByDayPassed()
     {
         $this->item->sell_in--;
-        if ($this->degrade_with_time) {
+        if (true === static::DEGRADE_WITH_TIME) {
             $this->item->quality = $this->item->quality - $this->getQualityMagnitudeForNextUpdate();
         }
 
-        if (!$this->degrade_with_time) {
+        if (false === static::DEGRADE_WITH_TIME) {
             $this->item->quality = $this->item->quality + $this->getQualityMagnitudeForNextUpdate();
         }
         $this->validateQualityBoundaries();

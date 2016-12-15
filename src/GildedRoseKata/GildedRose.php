@@ -4,10 +4,10 @@ namespace Kata\GildedRoseKata;
 
 class GildedRose
 {
-
+    /** @var Item[] */
     private $items;
 
-    function __construct($items)
+    function __construct(array $items)
     {
         $this->items = $items;
     }
