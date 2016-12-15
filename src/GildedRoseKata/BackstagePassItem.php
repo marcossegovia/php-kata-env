@@ -9,7 +9,7 @@ class BackstagePassItem extends BaseItem
     protected function getQualityMagnitudeForNextUpdate()
     {
         if ($this->item->sell_in <= 0) {
-            return $this->item->quality;
+            return -$this->item->quality;
         }
         if ($this->item->sell_in <= 5) {
             return 3;

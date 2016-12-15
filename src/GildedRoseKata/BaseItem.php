@@ -38,11 +38,6 @@ class BaseItem
         $this->validateQualityBoundaries();
     }
 
-    public function item()
-    {
-        return $this->item;
-    }
-
     private function validateQualityBoundaries()
     {
         if ($this->item->quality < 0) {

@@ -138,7 +138,8 @@ class GildedRoseTest extends \PHPUnit_Framework_TestCase
             [new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20), 1, 21, 14],
             [new Item('Backstage passes to a TAFKAL80ETC concert', 10, 49), 1, 50, 9],
             [new Item('Backstage passes to a TAFKAL80ETC concert', 5, 49), 1, 50, 4],
-            [new Item('Backstage passes to a TAFKAL80ETC concert', 3, 10), 1, 13, 2]
+            [new Item('Backstage passes to a TAFKAL80ETC concert', 3, 10), 1, 13, 2],
+            [new Item('Backstage passes to a TAFKAL80ETC concert', 3, 10), 10, 0, -7]
         ];
     }
 
