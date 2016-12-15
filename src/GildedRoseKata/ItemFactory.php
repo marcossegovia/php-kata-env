@@ -23,6 +23,9 @@ class ItemFactory
             case BackstagePassItem::ITEM_NAME:
                 return new BackstagePassItem($item);
                 break;
+            case ConjuredItem::ITEM_NAME:
+                return new ConjuredItem($item);
+                break;
             default:
                 return new BaseItem($item);
         }
