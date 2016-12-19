@@ -106,7 +106,7 @@ class GildedRoseTest extends \PHPUnit_Framework_TestCase
     private function whenSomeDaysPass($days_to_pass)
     {
         for ($i = 0; $i < $days_to_pass; $i++) {
-            $this->gilded_rose->update_quality();
+            $this->gilded_rose->updateQuality();
         }
     }
 

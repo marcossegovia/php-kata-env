@@ -12,7 +12,7 @@ class GildedRose
         $this->items = $items;
     }
 
-    public function update_quality()
+    public function updateQuality()
     {
         foreach ($this->items as $item) {
             $internal_item = ItemFactory::fromItem($item);
@@ -20,5 +20,3 @@ class GildedRose
         }
     }
 }
-
-
