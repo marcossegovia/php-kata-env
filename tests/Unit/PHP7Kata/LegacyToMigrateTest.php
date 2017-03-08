@@ -178,10 +178,8 @@ class LegacyToMigrateTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldBeCosaFina()
     {
-        $result = $this->legacy_to_migrate->printForEachValue();
+        $last_value = $this->legacy_to_migrate->printForEachValue();
 
-        $gen = [0 => 1];
-
-        $this->assertEquals($gen, $result);
+        $this->assertEquals(1, $last_value);
     }
 }

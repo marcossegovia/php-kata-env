@@ -2,8 +2,6 @@
 
 namespace Kata\PHP7Kata;
 
-use ArithmeticError;
-use DivisionByZeroError;
 use Kata\OtherExamples\Form;
 use Kata\OtherExamples\Example;
 use Kata\OtherExamples\NotAnExample;
@@ -207,7 +205,7 @@ final class LegacyToMigrate
             $this->doSomethingTooHeavy($key, $value);
         }
 
-        return $gen;
+        return $value;
     }
 
     private function doSomethingTooHeavy($key, $value)
