@@ -1,11 +1,11 @@
 <?php
 
-namespace Kata;
+namespace Kata\OtherExamples;
 
 final class Example
 {
     public function greetings() : string
     {
-        return "JellyTime";
+        return "Hey";
     }
 }
