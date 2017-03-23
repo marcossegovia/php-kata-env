@@ -9,7 +9,7 @@ final class FindCoupleByBirthdayDistance
     /** @var Person[] */
     private $people;
 
-    /** @var Couple[] */
+    /** @var CoupleCollection */
     private $couples;
 
     /** @var BirthdayDistanceCriteria */
@@ -18,30 +18,18 @@ final class FindCoupleByBirthdayDistance
     public function __construct(array $people)
     {
         $this->people  = $people;
-        $this->couples = $this->getCouples($people);
+        $this->couples = CoupleCollection::buildAllPossibleCouplesFromPeopleArray($people);
     }
 
     public function findByBirthdaysDistance(int $find_criteria): Couple
     {
-        if (empty($this->couples)) {
+        if (0 == count($this->couples)) {
             return new CoupleEmpty();
         }
 
         $this->birthday_distance_criteria = BirthdayDistanceCriteria::fromCriteriaParameter($find_criteria);
 
         return $this->getBestMatchCouple();
-    }
-
-    private function getCouples(array $people): array
-    {
-        $couples = [];
-        for ($i = 0; $i < count($people); $i++) {
-            for ($j = $i + 1; $j < count($people); $j++) {
-                $couples[] = new Couple($people[$i], $people[$j]);
-            }
-        }
-
-        return $couples;
     }
 
     private function getBestMatchCouple(): Couple
