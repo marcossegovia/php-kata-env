@@ -2,9 +2,10 @@
 
 namespace Kata\PHP7Kata;
 
-use Kata\OtherExamples\Form;
-use Kata\OtherExamples\Example;
-use Kata\OtherExamples\NotAnExample;
+use Behat\Testwork\Ordering\Orderer\Orderer;
+use Kata\OtherExamples\{
+    Example, Form, NotAnExample
+};
 
 final class LegacyToMigrate
 {
@@ -14,55 +15,31 @@ final class LegacyToMigrate
         'bird'
     ];
 
-    public function getStringOrNull($param)
+    public function getStringOrNull(?string $param):? string
     {
         return $param;
     }
 
-    public function sumOfIntegers(...$ints)
+    public function sumOfIntegers(int ...$ints)
     {
-        // let's review that all items are integers!
-        $result = array_map(
-            function ($value)
-            {
-                return (int) $value;
-            },
-            $ints
-        );
-
-        return array_sum($result);
+        return array_sum($ints);
     }
 
-    public function arraysSum(...$arrays)
+    public function arraysSum(array ...$arrays)
     {
-        return array_map(
-            function (array $array)
-            {
-                return ($array);
-            },
-            $arrays
-        );
+        return array_map(function (array $array) {
+            return ($array);
+        }, $arrays);
     }
 
     public function getUserName($user): string
     {
-        return isset($user['username']) ? $user['username'] : 'nobody';
+        return $user['username'] ?? 'nobody';
     }
 
     public function strcmpFromC($a, $b)
     {
-        if ($a == $b)
-        {
-            return 0;
-        }
-        elseif ($a > $b)
-        {
-            return 1;
-        }
-        else
-        {
-            return -1;
-        }
+        return $a <=> $b;
     }
 
     public function saySomething()
@@ -73,18 +50,8 @@ final class LegacyToMigrate
         return $example->greetings() . ' ' . $not_an_example->greetings() . '!';
     }
 
-    public function divideEnters($a, $b)
+    public function divideEnters(int $a, int $b)
     {
-        if (0 === $b)
-        {
-            throw new DivisionByZeroError();
-        }
-
-        if ($a === PHP_INT_MIN && -1 === $b)
-        {
-            throw new ArithmeticError();
-        }
-
         return round($a / $b, 0);
     }
 
@@ -92,23 +59,15 @@ final class LegacyToMigrate
     {
         $credit_card = 'daniel:madurell:visa:999888777';
 
-        $credit_card = preg_replace_callback(
-            '/([a-z]{1})/',
-            function ($m)
-            {
+        $credit_card = preg_replace_callback_array([
+            '/([a-z]{1})/' => function ($m) {
                 return strtoupper($m[1]);
             },
-            $credit_card
-        );
-
-        $credit_card = preg_replace_callback(
-            '/([0-9]{1})/',
-            function ($m)
-            {
+            '/([0-9]{1})/' => function ($m) {
                 return 'XXX';
-            },
-            $credit_card
-        );
+            }
+
+        ], $credit_card);
 
         return $credit_card;
     }
@@ -119,15 +78,13 @@ final class LegacyToMigrate
         $form2 = new Form(2);
 
         $getX = $form->getX();
-        $getX = $getX->bindTo($form2);
 
-        return $getX();
+        return $getX->call($form2);
     }
 
-    public function nothingToReturn(&$left, &$right)
+    public function nothingToReturn(&$left, &$right): void
     {
-        if ($left === $right)
-        {
+        if ($left === $right) {
             return;
         }
 
@@ -138,9 +95,9 @@ final class LegacyToMigrate
         return;
     }
 
-    public function getComposedName($data, $number_user)
+    public function getComposedName($data, $number_user) : string
     {
-        list($id, $name) = $data[$number_user];
+        [$id, $name] = $data[$number_user];
 
         return $id . '_' . $name;
     }
@@ -149,8 +106,7 @@ final class LegacyToMigrate
     {
         $all_composed_names = '';
 
-        foreach ($data as list($id, $name))
-        {
+        foreach ($data as [$id, $name]) {
             $all_composed_names .= $id . '_' . $name . '|';
         }
 
@@ -159,21 +115,10 @@ final class LegacyToMigrate
 
     public function tooMuchExceptionsMakeUglyCode()
     {
-        try
-        {
+        try {
             $this->functionThatFails();
-        }
-        catch (FirstException $e)
-        {
-            return false;
-        }
-
-        try
-        {
             $this->anotherFunctionThatAlsoFails();
-        }
-        catch (SecondException $e)
-        {
+        } catch (SecondException | FirstException $e) {
             return false;
         }
 
@@ -190,18 +135,16 @@ final class LegacyToMigrate
         throw new SecondException;
     }
 
-    public function getLastCharOfAString($a_string)
+    public function getLastCharOfAString(string $a_string): string
     {
         return substr($a_string, -1);
     }
 
     public function printForEachValue()
     {
-        //Yield me!
-        $gen = range(1, 1);
+        $gen = function () { return yield 1; };
 
-        foreach ($gen as $key => $value)
-        {
+        foreach ($gen() as $key => $value) {
             $this->doSomethingTooHeavy($key, $value);
         }
 
