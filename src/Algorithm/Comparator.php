@@ -13,5 +13,5 @@ final class Comparator
     public $second_person;
 
     /** @var int */
-    public $difference_number;
+    public $age_difference;
 }

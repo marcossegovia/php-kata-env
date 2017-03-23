@@ -48,7 +48,7 @@ final class FinderTest extends TestCase
         $list   = [];
         $finder = new Finder($list);
 
-        $result = $finder->find(Sorting::HIGHER_TO_LOWER);
+        $result = $finder->find(Sorting::SORT_CLOSEST_FIRST);
 
         $this->assertEquals(null, $result->first_person);
         $this->assertEquals(null, $result->second_person);
@@ -61,7 +61,7 @@ final class FinderTest extends TestCase
         $list[] = $this->sue;
         $finder = new Finder($list);
 
-        $result = $finder->find(Sorting::HIGHER_TO_LOWER);
+        $result = $finder->find(Sorting::SORT_CLOSEST_FIRST);
 
         $this->assertEquals(null, $result->first_person);
         $this->assertEquals(null, $result->second_person);
@@ -75,7 +75,7 @@ final class FinderTest extends TestCase
         $list[] = $this->greg;
         $finder = new Finder($list);
 
-        $result = $finder->find(Sorting::HIGHER_TO_LOWER);
+        $result = $finder->find(Sorting::SORT_CLOSEST_FIRST);
 
         $this->assertEquals($this->sue, $result->first_person);
         $this->assertEquals($this->greg, $result->second_person);
@@ -89,7 +89,7 @@ final class FinderTest extends TestCase
         $list[] = $this->greg;
         $finder = new Finder($list);
 
-        $result = $finder->find(Sorting::LOWER_TO_HIGHER);
+        $result = $finder->find(Sorting::SORT_FURTHEST_FIRST);
 
         $this->assertEquals($this->greg, $result->first_person);
         $this->assertEquals($this->mike, $result->second_person);
@@ -105,7 +105,7 @@ final class FinderTest extends TestCase
         $list[] = $this->greg;
         $finder = new Finder($list);
 
-        $result = $finder->find(Sorting::LOWER_TO_HIGHER);
+        $result = $finder->find(Sorting::SORT_FURTHEST_FIRST);
 
         $this->assertEquals($this->sue, $result->first_person);
         $this->assertEquals($this->sarah, $result->second_person);
@@ -123,7 +123,7 @@ final class FinderTest extends TestCase
         $list[] = $this->greg;
         $finder = new Finder($list);
 
-        $result = $finder->find(Sorting::HIGHER_TO_LOWER);
+        $result = $finder->find(Sorting::SORT_CLOSEST_FIRST);
 
         $this->assertEquals($this->sue, $result->first_person);
         $this->assertEquals($this->greg, $result->second_person);

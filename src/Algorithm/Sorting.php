@@ -6,6 +6,6 @@ namespace Kata\Algorithm;
 
 interface Sorting
 {
-    const HIGHER_TO_LOWER = 1;
-    const LOWER_TO_HIGHER = 2;
+    const SORT_CLOSEST_FIRST = 1;
+    const SORT_FURTHEST_FIRST = 2;
 }
