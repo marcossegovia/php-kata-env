@@ -6,7 +6,7 @@ namespace Kata\Algorithm;
 
 use DateTime;
 
-final class Thing
+final class Person
 {
     /** @var string */
     public $name;
@@ -14,7 +14,7 @@ final class Thing
     /** @var DateTime */
     public $birthDate;
 
-    public function getName(): string
+    public function name(): string
     {
         return $this->name;
     }
@@ -24,7 +24,7 @@ final class Thing
         $this->name = $name;
     }
 
-    public function getBirthDate(): DateTime
+    public function birthDate(): DateTime
     {
         return $this->birthDate;
     }
