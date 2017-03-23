@@ -9,6 +9,8 @@ final class Finder
     /** @var Person[] */
     private $people;
 
+    private $couple_type;
+
     public function __construct(array $people)
     {
         $this->people = $people;
@@ -16,6 +18,8 @@ final class Finder
 
     public function find(int $couple_type): Couple
     {
+        $this->couple_type = $couple_type;
+
         /** @var Couple[] $couple_array */
         $couple_array = [];
         $couple_array = $this->sortPeople($couple_array);
@@ -26,7 +30,7 @@ final class Finder
             return new Couple();
         }
 
-        return $this->getCoupleResult($couple_type, $couple_array);
+        return $this->getCoupleResult($couple_array);
     }
 
     /**
@@ -49,17 +53,16 @@ final class Finder
     }
 
     /**
-     * @param int $couple_type
      * @param $couple_array
      * @return mixed
      */
-    private function getCoupleResult(int $couple_type, $couple_array)
+    private function getCoupleResult($couple_array)
     {
         $answer = $couple_array[0];
 
         foreach ($couple_array as $couple_candidate) {
 
-            $answer = $this->getCoupleByCoupleType($couple_type, $couple_candidate, $answer);
+            $answer = $this->getCoupleByCoupleType($couple_candidate, $answer);
         }
         return $answer;
     }
@@ -86,14 +89,14 @@ final class Finder
     }
 
     /**
-     * @param int $couple_type
      * @param $couple_candidate
      * @param $answer
      * @return mixed
      */
-    private function getCoupleByCoupleType(int $couple_type, $couple_candidate, $answer)
+    private function getCoupleByCoupleType($couple_candidate, $answer)
     {
-        switch ($couple_type) {
+        switch ($this->couple_type)
+        {
             case CoupleType::CLOSE:
                 if ($couple_candidate->age_difference < $answer->age_difference) {
                     $answer = $couple_candidate;
