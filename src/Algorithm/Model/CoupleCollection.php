@@ -2,7 +2,7 @@
 
 namespace Kata\Algorithm\Model;
 
-class CoupleCollection implements \Iterator, \Countable, \ArrayAccess
+final class CoupleCollection implements \Iterator, \Countable, \ArrayAccess
 {
     /** @var Couple[] */
     private $all_items;
@@ -16,16 +16,19 @@ class CoupleCollection implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
-     * @param array $people_array
+     * @param Person[] $people_array
      *
      * @return CoupleCollection
      */
     public static function buildAllPossibleCouplesFromPeopleArray(array $people_array): CoupleCollection
     {
         $couples = [];
-        for ($i = 0; $i < count($people_array); $i++) {
-            for ($j = $i + 1; $j < count($people_array); $j++) {
-                $couples[] = new Couple($people_array[$i], $people_array[$j]);
+
+        foreach ($people_array as $first_person) {
+            foreach ($people_array as $second_person) {
+                if (!$first_person->equals($second_person)) {
+                    $couples[] = new Couple($first_person, $second_person);
+                }
             }
         }
 

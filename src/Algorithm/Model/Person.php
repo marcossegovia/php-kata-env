@@ -16,7 +16,7 @@ final class Person
 
     public function __construct($a_name, DateTime $a_birth_date)
     {
-        $this->name       = $a_name;
+        $this->name = $a_name;
         $this->birth_date = $a_birth_date;
     }
 
@@ -28,5 +28,11 @@ final class Person
     public function birthDate(): DateTime
     {
         return $this->birth_date;
+    }
+
+    public function equals(Person $other_person)
+    {
+        return $this->name === $other_person->name
+            && $this->birth_date->getTimestamp() === $other_person->birth_date->getTimestamp();
     }
 }
