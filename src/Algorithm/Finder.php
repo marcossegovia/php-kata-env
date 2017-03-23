@@ -6,60 +6,60 @@ namespace Kata\Algorithm;
 
 final class Finder
 {
-    /** @var Thing[] */
-    private $_p;
+    /** @var Person[] */
+    private $people;
 
-    public function __construct(array $p)
+    public function __construct(array $all_people)
     {
-        $this->_p = $p;
+        $this->people = $all_people;
     }
 
-    public function find(int $ft): F
+    public function find(int $sorting_type): Comparator
     {
-        /** @var F[] $tr */
-        $tr = [];
+        /** @var Comparator[] $comparators */
+        $comparators = [];
 
-        for ($i = 0; $i < count($this->_p); $i++) {
-            for ($j = $i + 1; $j < count($this->_p); $j++) {
-                $r = new F();
+        for ($i = 0; $i < count($this->people); $i++) {
+            for ($j = $i + 1; $j < count($this->people); $j++) {
+                $r = new Comparator();
 
-                if ($this->_p[$i]->birthDate < $this->_p[$j]->birthDate) {
-                    $r->p1 = $this->_p[$i];
-                    $r->p2 = $this->_p[$j];
+                if ($this->people[$i]->birthDate < $this->people[$j]->birthDate) {
+                    $r->first_person = $this->people[$i];
+                    $r->second_person           = $this->people[$j];
                 } else {
-                    $r->p1 = $this->_p[$j];
-                    $r->p2 = $this->_p[$i];
+                    $r->first_person = $this->people[$j];
+                    $r->second_person           = $this->people[$i];
                 }
 
-                $r->d = $r->p2->birthDate->getTimestamp()
-                    - $r->p1->birthDate->getTimestamp();
+                $r->difference_number = $r->second_person->birthDate->getTimestamp()
+                    - $r->first_person->birthDate->getTimestamp();
 
-                $tr[] = $r;
+                $comparators[] = $r;
             }
         }
 
-        if (count($tr) < 1) {
-            return new F();
+        if (count($comparators) < 1) {
+            return new Comparator();
         }
 
-        $answer = $tr[0];
+        $first = $comparators[0];
 
-        foreach ($tr as $result) {
-            switch ($ft) {
-                case FT::ONE:
-                    if ($result->d < $answer->d) {
-                        $answer = $result;
+        foreach ($comparators as $result) {
+            switch ($sorting_type) {
+                case Sorting::HIGHER_TO_LOWER:
+                    if ($result->difference_number < $first->difference_number) {
+                        $first = $result;
                     }
                     break;
 
-                case FT::TWO:
-                    if ($result->d > $answer->d) {
-                        $answer = $result;
+                case Sorting::LOWER_TO_HIGHER:
+                    if ($result->difference_number > $first->difference_number) {
+                        $first = $result;
                     }
                     break;
             }
         }
 
-        return $answer;
+        return $first;
     }
 }
