@@ -6,6 +6,6 @@ namespace Kata\Algorithm;
 
 interface FT
 {
-    const ONE = 1;
-    const TWO = 2;
+    const CLOSE = 1;
+    const FURTHER = 2;
 }

@@ -14,48 +14,47 @@ final class Finder
         $this->people = $people;
     }
 
-    public function find(int $ft): F
+    public function find(int $couple_type): Couple
     {
-        /** @var F[] $tr */
-        $tr = [];
+        /** @var Couple[] $couple_array */
+        $couple_array = [];
 
         for ($i = 0; $i < count($this->people); $i++) {
             for ($j = $i + 1; $j < count($this->people); $j++) {
 
-                $r = new F();
+                $couple = new Couple();
 
                 if ($this->people[$i]->birthDate < $this->people[$j]->birthDate) {
-                    $r->younger_person = $this->people[$i];
-                    $r->older_person = $this->people[$j];
+                    $couple->person_1 = $this->people[$i];
+                    $couple->person_2 = $this->people[$j];
                 } else {
-                    $r->younger_person = $this->people[$j];
-                    $r->older_person = $this->people[$i];
+                    $couple->person_1 = $this->people[$j];
+                    $couple->person_2 = $this->people[$i];
                 }
 
-                $r->age_difference = $r->older_person->birthDate->getTimestamp()
-                    - $r->younger_person->birthDate->getTimestamp();
+                $couple->age_difference = $couple->person_2->birthDate->getTimestamp() - $couple->person_1->birthDate->getTimestamp();
 
-                $tr[] = $r;
+                $couple_array[] = $couple;
             }
         }
 
-        if (count($tr) < 1) {
-            return new F();
+        if (count($couple_array) < 1) {
+            return new Couple();
         }
 
-        $answer = $tr[0];
+        $answer = $couple_array[0];
 
-        foreach ($tr as $result) {
-            switch ($ft) {
-                case FT::ONE:
-                    if ($result->age_difference < $answer->age_difference) {
-                        $answer = $result;
+        foreach ($couple_array as $couple_candidate) {
+            switch ($couple_type) {
+                case FT::CLOSE:
+                    if ($couple_candidate->age_difference < $answer->age_difference) {
+                        $answer = $couple_candidate;
                     }
                     break;
 
-                case FT::TWO:
-                    if ($result->age_difference > $answer->age_difference) {
-                        $answer = $result;
+                case FT::FURTHER:
+                    if ($couple_candidate->age_difference > $answer->age_difference) {
+                        $answer = $couple_candidate;
                     }
                     break;
             }
