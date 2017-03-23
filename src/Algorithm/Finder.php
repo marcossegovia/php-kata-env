@@ -58,19 +58,8 @@ final class Finder
         $answer = $couple_array[0];
 
         foreach ($couple_array as $couple_candidate) {
-            switch ($couple_type) {
-                case CoupleType::CLOSE:
-                    if ($couple_candidate->age_difference < $answer->age_difference) {
-                        $answer = $couple_candidate;
-                    }
-                    break;
 
-                case CoupleType::FURTHER:
-                    if ($couple_candidate->age_difference > $answer->age_difference) {
-                        $answer = $couple_candidate;
-                    }
-                    break;
-            }
+            $answer = $this->getCoupleByCoupleType($couple_type, $couple_candidate, $answer);
         }
         return $answer;
     }
@@ -94,5 +83,29 @@ final class Finder
 
         $couple->age_difference = $couple->person_2->birthDate->getTimestamp() - $couple->person_1->birthDate->getTimestamp();
         return $couple;
+    }
+
+    /**
+     * @param int $couple_type
+     * @param $couple_candidate
+     * @param $answer
+     * @return mixed
+     */
+    private function getCoupleByCoupleType(int $couple_type, $couple_candidate, $answer)
+    {
+        switch ($couple_type) {
+            case CoupleType::CLOSE:
+                if ($couple_candidate->age_difference < $answer->age_difference) {
+                    $answer = $couple_candidate;
+                }
+                break;
+
+            case CoupleType::FURTHER:
+                if ($couple_candidate->age_difference > $answer->age_difference) {
+                    $answer = $couple_candidate;
+                }
+                break;
+        }
+        return $answer;
     }
 }
