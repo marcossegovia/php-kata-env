@@ -45,6 +45,16 @@ final class Finder
             return new PeopleComparison();
         }
 
+        return $this->getPeopleComparisonWith($birthday_sort, $people_comparisons);
+    }
+
+    private function isFirstPersonMoreYoungerThanSecondPerson($first_person_index, $second_person_index): bool
+    {
+        return $this->people[$first_person_index]->birthDate() < $this->people[$second_person_index]->birthDate();
+    }
+
+    private function getPeopleComparisonWith(int $birthday_sort, array $people_comparisons)
+    {
         $answer = $people_comparisons[0];
 
         foreach ($people_comparisons as $result) {
@@ -64,10 +74,5 @@ final class Finder
         }
 
         return $answer;
-    }
-
-    private function isFirstPersonMoreYoungerThanSecondPerson($first_person_index, $second_person_index): bool
-    {
-        return $this->people[$first_person_index]->birthDate() < $this->people[$second_person_index]->birthDate();
     }
 }
