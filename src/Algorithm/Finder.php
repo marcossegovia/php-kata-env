@@ -7,53 +7,53 @@ namespace Kata\Algorithm;
 final class Finder
 {
     /** @var Person[] */
-    private $_p;
+    private $people;
 
-    public function __construct(array $p)
+    public function __construct(array $people)
     {
-        $this->_p = $p;
+        $this->people = $people;
     }
 
-    public function find(int $ft): F
+    public function findByBirthdaysDistance(int $find_criteria): Couple
     {
-        /** @var F[] $tr */
-        $tr = [];
+        /** @var Couple[] $all_possible_couples */
+        $all_possible_couples = [];
 
-        for ($i = 0; $i < count($this->_p); $i++) {
-            for ($j = $i + 1; $j < count($this->_p); $j++) {
-                $r = new F();
+        for ($i = 0; $i < count($this->people); $i++) {
+            for ($j = $i + 1; $j < count($this->people); $j++) {
+                $couple = new Couple();
 
-                if ($this->_p[$i]->birthDate() < $this->_p[$j]->birthDate()) {
-                    $r->p1 = $this->_p[$i];
-                    $r->p2 = $this->_p[$j];
+                if ($this->people[$i]->birthDate() < $this->people[$j]->birthDate()) {
+                    $couple->younger = $this->people[$i];
+                    $couple->older      = $this->people[$j];
                 } else {
-                    $r->p1 = $this->_p[$j];
-                    $r->p2 = $this->_p[$i];
+                    $couple->younger = $this->people[$j];
+                    $couple->older      = $this->people[$i];
                 }
 
-                $r->d = $r->p2->birthDate()->getTimestamp()
-                    - $r->p1->birthDate()->getTimestamp();
+                $couple->birthday_distance_in_seconds = $couple->older->birthDate()->getTimestamp()
+                    - $couple->younger->birthDate()->getTimestamp();
 
-                $tr[] = $r;
+                $all_possible_couples[] = $couple;
             }
         }
 
-        if (count($tr) < 1) {
-            return new F();
+        if (count($all_possible_couples) < 1) {
+            return new Couple();
         }
 
-        $answer = $tr[0];
+        $answer = $all_possible_couples[0];
 
-        foreach ($tr as $result) {
-            switch ($ft) {
-                case FT::ONE:
-                    if ($result->d < $answer->d) {
+        foreach ($all_possible_couples as $result) {
+            switch ($find_criteria) {
+                case FindByBirthdaysCriteria::CLOSEST_BIRTHDAY:
+                    if ($result->birthday_distance_in_seconds < $answer->birthday_distance_in_seconds) {
                         $answer = $result;
                     }
                     break;
 
-                case FT::TWO:
-                    if ($result->d > $answer->d) {
+                case FindByBirthdaysCriteria::FURTHEST_BIRTHDAY:
+                    if ($result->birthday_distance_in_seconds > $answer->birthday_distance_in_seconds) {
                         $answer = $result;
                     }
                     break;

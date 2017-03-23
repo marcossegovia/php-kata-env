@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace KataTest\Unit\Algorithm;
 
 use Kata\Algorithm\Finder;
-use Kata\Algorithm\FT;
+use Kata\Algorithm\FindByBirthdaysCriteria;
 use Kata\Algorithm\Person;
 use PHPUnit\Framework\TestCase;
 
@@ -37,10 +37,10 @@ final class FinderTest extends TestCase
         $list   = [];
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::ONE);
+        $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::CLOSEST_BIRTHDAY);
 
-        $this->assertEquals(null, $result->p1);
-        $this->assertEquals(null, $result->p2);
+        $this->assertEquals(null, $couple->younger);
+        $this->assertEquals(null, $couple->older);
     }
 
     /** @test */
@@ -50,10 +50,10 @@ final class FinderTest extends TestCase
         $list[] = $this->sue;
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::ONE);
+        $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::CLOSEST_BIRTHDAY);
 
-        $this->assertEquals(null, $result->p1);
-        $this->assertEquals(null, $result->p2);
+        $this->assertEquals(null, $couple->younger);
+        $this->assertEquals(null, $couple->older);
     }
 
     /** @test */
@@ -64,10 +64,10 @@ final class FinderTest extends TestCase
         $list[] = $this->greg;
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::ONE);
+        $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::CLOSEST_BIRTHDAY);
 
-        $this->assertEquals($this->sue, $result->p1);
-        $this->assertEquals($this->greg, $result->p2);
+        $this->assertEquals($this->sue, $couple->younger);
+        $this->assertEquals($this->greg, $couple->older);
     }
 
     /** @test */
@@ -78,10 +78,10 @@ final class FinderTest extends TestCase
         $list[] = $this->greg;
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::TWO);
+        $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::FURTHEST_BIRTHDAY);
 
-        $this->assertEquals($this->greg, $result->p1);
-        $this->assertEquals($this->mike, $result->p2);
+        $this->assertEquals($this->greg, $couple->younger);
+        $this->assertEquals($this->mike, $couple->older);
     }
 
     /** @test */
@@ -94,10 +94,10 @@ final class FinderTest extends TestCase
         $list[] = $this->greg;
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::TWO);
+        $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::FURTHEST_BIRTHDAY);
 
-        $this->assertEquals($this->sue, $result->p1);
-        $this->assertEquals($this->sarah, $result->p2);
+        $this->assertEquals($this->sue, $couple->younger);
+        $this->assertEquals($this->sarah, $couple->older);
     }
 
     /**
@@ -112,9 +112,9 @@ final class FinderTest extends TestCase
         $list[] = $this->greg;
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::ONE);
+        $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::CLOSEST_BIRTHDAY);
 
-        $this->assertEquals($this->sue, $result->p1);
-        $this->assertEquals($this->greg, $result->p2);
+        $this->assertEquals($this->sue, $couple->younger);
+        $this->assertEquals($this->greg, $couple->older);
     }
 }

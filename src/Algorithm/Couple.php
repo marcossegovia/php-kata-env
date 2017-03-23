@@ -4,14 +4,14 @@ declare(strict_types = 1);
 
 namespace Kata\Algorithm;
 
-final class F
+final class Couple
 {
     /** @var Person */
-    public $p1;
+    public $younger;
 
     /** @var Person */
-    public $p2;
+    public $older;
 
     /** @var int */
-    public $d;
+    public $birthday_distance_in_seconds;
 }
