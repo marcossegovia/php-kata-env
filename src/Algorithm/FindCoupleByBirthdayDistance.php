@@ -49,7 +49,7 @@ final class FindCoupleByBirthdayDistance
         $selected_couple = $this->couples[0];
 
         foreach ($this->couples as $current_couple) {
-            if ($this->birthday_distance_criteria->isSatisfiedBy($current_couple, $selected_couple)) {
+            if ($this->birthday_distance_criteria->isSatisfiedBy($current_couple)->versus($selected_couple)) {
                 $selected_couple = $current_couple;
             }
         }

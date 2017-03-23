@@ -12,6 +12,9 @@ final class BirthdayDistanceCriteria
     /** @var int */
     private $criteria;
 
+    /** @var Couple */
+    private $first_couple;
+
     private function __construct(int $criteria)
     {
         $this->criteria = $criteria;
@@ -26,14 +29,21 @@ final class BirthdayDistanceCriteria
         return new self($criteria);
     }
 
-    public function isSatisfiedBy(Couple $first_couple, Couple $second_couple): bool
+    public function isSatisfiedBy(Couple $first_couple)
+    {
+        $this->first_couple = $first_couple;
+
+        return $this;
+    }
+
+    public function versus(Couple $second_couple): bool
     {
         if (self::CLOSEST_BIRTHDAY === $this->criteria) {
-            return $first_couple->hasLessDistanceThan($second_couple);
+            return $this->first_couple->hasLessDistanceThan($second_couple);
         }
 
         if (self::FURTHEST_BIRTHDAY === $this->criteria) {
-            return $first_couple->hasGreaterDistanceThan($second_couple);
+            return $this->first_couple->hasGreaterDistanceThan($second_couple);
         }
     }
 }
