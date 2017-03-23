@@ -27,15 +27,15 @@ final class Finder
                 $second_person = $this->people[$j];
 
                 if ($this->isFirstPersonMoreYoungerThanSecondPerson($i, $j)) {
-                    $current_people_comparison->setFirstPerson($first_person);
-                    $current_people_comparison->setSecondPerson($second_person);
+                    $current_people_comparison->setYoungPerson($first_person);
+                    $current_people_comparison->setOldPerson($second_person);
                 } else {
-                    $current_people_comparison->setFirstPerson($second_person);
-                    $current_people_comparison->setSecondPerson($first_person);
+                    $current_people_comparison->setYoungPerson($second_person);
+                    $current_people_comparison->setOldPerson($first_person);
                 }
 
-                $current_people_comparison->setBirthdayDifference($current_people_comparison->secondPerson()->birthDate()->getTimestamp()
-                    - $current_people_comparison->firstPerson()->birthDate()->getTimestamp());
+                $current_people_comparison->setBirthdayDifference($current_people_comparison->oldPerson()->birthDate()->getTimestamp()
+                    - $current_people_comparison->youngPerson()->birthDate()->getTimestamp());
 
                 $people_comparisons[] = $current_people_comparison;
             }

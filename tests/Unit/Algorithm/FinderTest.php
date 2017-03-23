@@ -39,8 +39,8 @@ final class FinderTest extends TestCase
 
         $result = $finder->find(BirthdaySort::CLOSEST);
 
-        $this->assertEquals(null, $result->firstPerson());
-        $this->assertEquals(null, $result->secondPerson());
+        $this->assertEquals(null, $result->youngPerson());
+        $this->assertEquals(null, $result->oldPerson());
     }
 
     /** @test */
@@ -52,8 +52,8 @@ final class FinderTest extends TestCase
 
         $result = $finder->find(BirthdaySort::CLOSEST);
 
-        $this->assertEquals(null, $result->firstPerson());
-        $this->assertEquals(null, $result->secondPerson());
+        $this->assertEquals(null, $result->youngPerson());
+        $this->assertEquals(null, $result->oldPerson());
     }
 
     /** @test */
@@ -66,8 +66,8 @@ final class FinderTest extends TestCase
 
         $result = $finder->find(BirthdaySort::CLOSEST);
 
-        $this->assertEquals($this->sue, $result->firstPerson());
-        $this->assertEquals($this->greg, $result->secondPerson());
+        $this->assertEquals($this->sue, $result->youngPerson());
+        $this->assertEquals($this->greg, $result->oldPerson());
     }
 
     /** @test */
@@ -80,8 +80,8 @@ final class FinderTest extends TestCase
 
         $result = $finder->find(BirthdaySort::FURTHEST);
 
-        $this->assertEquals($this->greg, $result->firstPerson());
-        $this->assertEquals($this->mike, $result->secondPerson());
+        $this->assertEquals($this->greg, $result->youngPerson());
+        $this->assertEquals($this->mike, $result->oldPerson());
     }
 
     /** @test */
@@ -96,8 +96,8 @@ final class FinderTest extends TestCase
 
         $result = $finder->find(BirthdaySort::FURTHEST);
 
-        $this->assertEquals($this->sue, $result->firstPerson());
-        $this->assertEquals($this->sarah, $result->secondPerson());
+        $this->assertEquals($this->sue, $result->youngPerson());
+        $this->assertEquals($this->sarah, $result->oldPerson());
     }
 
     /**
@@ -114,7 +114,7 @@ final class FinderTest extends TestCase
 
         $result = $finder->find(BirthdaySort::CLOSEST);
 
-        $this->assertEquals($this->sue, $result->firstPerson());
-        $this->assertEquals($this->greg, $result->secondPerson());
+        $this->assertEquals($this->sue, $result->youngPerson());
+        $this->assertEquals($this->greg, $result->oldPerson());
     }
 }

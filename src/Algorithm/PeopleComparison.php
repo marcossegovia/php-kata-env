@@ -7,22 +7,22 @@ namespace Kata\Algorithm;
 final class PeopleComparison
 {
     /** @var Person */
-    private $first_person;
+    private $young_person;
 
     /** @var Person */
-    private $second_person;
+    private $old_person;
 
     /** @var int */
     private $birthday_difference;
 
-    public function firstPerson()
+    public function youngPerson()
     {
-        return $this->first_person;
+        return $this->young_person;
     }
 
-    public function secondPerson()
+    public function oldPerson()
     {
-        return $this->second_person;
+        return $this->old_person;
     }
 
     public function birthdayDifference()
@@ -30,14 +30,14 @@ final class PeopleComparison
         return $this->birthday_difference;
     }
 
-    public function setFirstPerson(Person $a_person)
+    public function setYoungPerson(Person $a_person)
     {
-        $this->first_person = $a_person;
+        $this->young_person = $a_person;
     }
 
-    public function setSecondPerson(Person $a_person)
+    public function setOldPerson(Person $a_person)
     {
-        $this->second_person = $a_person;
+        $this->old_person = $a_person;
     }
 
     public function setBirthdayDifference(int $a_birthday_difference)
