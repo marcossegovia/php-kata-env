@@ -34,9 +34,6 @@ final class Finder
                     $current_people_comparison->setOldPerson($first_person);
                 }
 
-                $current_people_comparison->setBirthdayDifference($current_people_comparison->oldPerson()->birthDate()->getTimestamp()
-                    - $current_people_comparison->youngPerson()->birthDate()->getTimestamp());
-
                 $people_comparisons[] = $current_people_comparison;
             }
         }

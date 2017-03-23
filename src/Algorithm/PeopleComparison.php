@@ -27,6 +27,9 @@ final class PeopleComparison
 
     public function birthdayDifference()
     {
+        $this->birthday_difference = $this->old_person->birthDate()->getTimestamp()
+            - $this->youngPerson()->birthDate()->getTimestamp();
+
         return $this->birthday_difference;
     }
 
@@ -38,10 +41,5 @@ final class PeopleComparison
     public function setOldPerson(Person $a_person)
     {
         $this->old_person = $a_person;
-    }
-
-    public function setBirthdayDifference(int $a_birthday_difference)
-    {
-        $this->birthday_difference = $a_birthday_difference;
     }
 }
