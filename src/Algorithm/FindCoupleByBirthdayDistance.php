@@ -4,13 +4,16 @@ declare(strict_types = 1);
 
 namespace Kata\Algorithm;
 
-final class Finder
+final class FindCoupleByBirthdayDistance
 {
     /** @var Person[] */
     private $people;
 
     /** @var Couple[] */
     private $couples;
+
+    /** @var BirthdayDistanceCriteria */
+    private $birthday_distance_criteria;
 
     public function __construct(array $people)
     {
@@ -24,25 +27,9 @@ final class Finder
             return new CoupleEmpty();
         }
 
-        $selected_couple = $this->couples[0];
+        $this->birthday_distance_criteria = BirthdayDistanceCriteria::fromCriteriaParameter($find_criteria);
 
-        foreach ($this->couples as $couple) {
-            switch ($find_criteria) {
-                case FindByBirthdaysCriteria::CLOSEST_BIRTHDAY:
-                    if ($couple->birthday_distance_in_seconds < $selected_couple->birthday_distance_in_seconds) {
-                        $selected_couple = $couple;
-                    }
-                    break;
-
-                case FindByBirthdaysCriteria::FURTHEST_BIRTHDAY:
-                    if ($couple->birthday_distance_in_seconds > $selected_couple->birthday_distance_in_seconds) {
-                        $selected_couple = $couple;
-                    }
-                    break;
-            }
-        }
-
-        return $selected_couple;
+        return $this->getBestMatchCouple();
     }
 
     private function getCouples(array $people): array
@@ -55,5 +42,18 @@ final class Finder
         }
 
         return $couples;
+    }
+
+    private function getBestMatchCouple(): Couple
+    {
+        $selected_couple = $this->couples[0];
+
+        foreach ($this->couples as $current_couple) {
+            if ($this->birthday_distance_criteria->isSatisfiedBy($current_couple, $selected_couple)) {
+                $selected_couple = $current_couple;
+            }
+        }
+
+        return $selected_couple;
     }
 }

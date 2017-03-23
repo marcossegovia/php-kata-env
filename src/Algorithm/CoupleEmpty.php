@@ -19,9 +19,4 @@ final class CoupleEmpty extends Couple
     {
         return null;
     }
-
-    public function birthdayDistanceInSeconds()
-    {
-        return null;
-    }
 }

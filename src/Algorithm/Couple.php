@@ -48,8 +48,18 @@ class Couple
     /**
      * @return int
      */
-    public function birthdayDistanceInSeconds()
+    public function birthdayDistanceInSeconds(): int
     {
         return $this->birthday_distance_in_seconds;
+    }
+
+    public function hasGreaterDistanceThan(Couple $another_couple): bool
+    {
+        return $this->birthday_distance_in_seconds > $another_couple->birthday_distance_in_seconds;
+    }
+
+    public function hasLessDistanceThan(Couple $another_couple): bool
+    {
+        return $this->birthday_distance_in_seconds < $another_couple->birthday_distance_in_seconds;
     }
 }

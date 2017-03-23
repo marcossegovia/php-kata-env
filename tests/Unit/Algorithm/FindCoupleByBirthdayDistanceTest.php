@@ -4,12 +4,12 @@ declare(strict_types = 1);
 
 namespace KataTest\Unit\Algorithm;
 
-use Kata\Algorithm\Finder;
-use Kata\Algorithm\FindByBirthdaysCriteria;
+use Kata\Algorithm\BirthdayDistanceCriteria;
+use Kata\Algorithm\FindCoupleByBirthdayDistance;
 use Kata\Algorithm\Person;
 use PHPUnit\Framework\TestCase;
 
-final class FinderTest extends TestCase
+final class FindCoupleByBirthdayDistanceTest extends TestCase
 {
     /** @var Person */
     private $sue;
@@ -35,9 +35,9 @@ final class FinderTest extends TestCase
     public function should_return_empty_when_given_empty_list()
     {
         $list   = [];
-        $finder = new Finder($list);
+        $finder = new FindCoupleByBirthdayDistance($list);
 
-        $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::CLOSEST_BIRTHDAY);
+        $couple = $finder->findByBirthdaysDistance(BirthdayDistanceCriteria::CLOSEST_BIRTHDAY);
 
         $this->assertEquals(null, $couple->younger());
         $this->assertEquals(null, $couple->older());
@@ -46,11 +46,10 @@ final class FinderTest extends TestCase
     /** @test */
     public function should_return_empty_when_given_one_person()
     {
-        $list   = [];
-        $list[] = $this->sue;
-        $finder = new Finder($list);
+        $list   = [$this->sue];
+        $finder = new FindCoupleByBirthdayDistance($list);
 
-        $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::CLOSEST_BIRTHDAY);
+        $couple = $finder->findByBirthdaysDistance(BirthdayDistanceCriteria::CLOSEST_BIRTHDAY);
 
         $this->assertEquals(null, $couple->younger());
         $this->assertEquals(null, $couple->older());
@@ -59,12 +58,10 @@ final class FinderTest extends TestCase
     /** @test */
     public function should_return_closest_two_for_two_people()
     {
-        $list   = [];
-        $list[] = $this->sue;
-        $list[] = $this->greg;
-        $finder = new Finder($list);
+        $list   = [$this->sue, $this->greg];
+        $finder = new FindCoupleByBirthdayDistance($list);
 
-        $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::CLOSEST_BIRTHDAY);
+        $couple = $finder->findByBirthdaysDistance(BirthdayDistanceCriteria::CLOSEST_BIRTHDAY);
 
         $this->assertEquals($this->sue, $couple->younger());
         $this->assertEquals($this->greg, $couple->older());
@@ -73,12 +70,10 @@ final class FinderTest extends TestCase
     /** @test */
     public function should_return_furthest_two_for_two_people()
     {
-        $list   = [];
-        $list[] = $this->mike;
-        $list[] = $this->greg;
-        $finder = new Finder($list);
+        $list   = [$this->mike, $this->greg];
+        $finder = new FindCoupleByBirthdayDistance($list);
 
-        $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::FURTHEST_BIRTHDAY);
+        $couple = $finder->findByBirthdaysDistance(BirthdayDistanceCriteria::FURTHEST_BIRTHDAY);
 
         $this->assertEquals($this->greg, $couple->younger());
         $this->assertEquals($this->mike, $couple->older());
@@ -87,14 +82,10 @@ final class FinderTest extends TestCase
     /** @test */
     public function should_return_furthest_two_for_four_people()
     {
-        $list   = [];
-        $list[] = $this->sue;
-        $list[] = $this->sarah;
-        $list[] = $this->mike;
-        $list[] = $this->greg;
-        $finder = new Finder($list);
+        $list   = [$this->sue, $this->sarah, $this->mike, $this->greg];
+        $finder = new FindCoupleByBirthdayDistance($list);
 
-        $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::FURTHEST_BIRTHDAY);
+        $couple = $finder->findByBirthdaysDistance(BirthdayDistanceCriteria::FURTHEST_BIRTHDAY);
 
         $this->assertEquals($this->sue, $couple->younger());
         $this->assertEquals($this->sarah, $couple->older());
@@ -105,14 +96,10 @@ final class FinderTest extends TestCase
      */
     public function should_return_closest_two_for_four_people()
     {
-        $list   = [];
-        $list[] = $this->sue;
-        $list[] = $this->sarah;
-        $list[] = $this->mike;
-        $list[] = $this->greg;
-        $finder = new Finder($list);
+        $list   = [$this->sue, $this->sarah, $this->mike, $this->greg];
+        $finder = new FindCoupleByBirthdayDistance($list);
 
-        $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::CLOSEST_BIRTHDAY);
+        $couple = $finder->findByBirthdaysDistance(BirthdayDistanceCriteria::CLOSEST_BIRTHDAY);
 
         $this->assertEquals($this->sue, $couple->younger());
         $this->assertEquals($this->greg, $couple->older());
