@@ -35,24 +35,16 @@ final class Finder
      */
     private function sortPeople($couple_array): array
     {
-        for ($i = 0; $i < count($this->people); $i++) {
-            for ($j = $i + 1; $j < count($this->people); $j++) {
+        $number_of_people = count($this->people);
 
-                $couple = new Couple();
-
-                if ($this->people[$i]->birthDate < $this->people[$j]->birthDate) {
-                    $couple->person_1 = $this->people[$i];
-                    $couple->person_2 = $this->people[$j];
-                } else {
-                    $couple->person_1 = $this->people[$j];
-                    $couple->person_2 = $this->people[$i];
-                }
-
-                $couple->age_difference = $couple->person_2->birthDate->getTimestamp() - $couple->person_1->birthDate->getTimestamp();
-
-                $couple_array[] = $couple;
+        for ($i = 0; $i < $number_of_people; $i++)
+        {
+            for ($j = $i + 1; $j < $number_of_people; $j++)
+            {
+                $couple_array[] = $this->getCoupleByAge($i, $j);
             }
         }
+
         return $couple_array;
     }
 
@@ -81,5 +73,26 @@ final class Finder
             }
         }
         return $answer;
+    }
+
+    /**
+     * @param $i
+     * @param $j
+     * @return Couple
+     */
+    private function getCoupleByAge($i, $j): Couple
+    {
+        $couple = new Couple();
+
+        if ($this->people[$i]->birthDate < $this->people[$j]->birthDate) {
+            $couple->person_1 = $this->people[$i];
+            $couple->person_2 = $this->people[$j];
+        } else {
+            $couple->person_1 = $this->people[$j];
+            $couple->person_2 = $this->people[$i];
+        }
+
+        $couple->age_difference = $couple->person_2->birthDate->getTimestamp() - $couple->person_1->birthDate->getTimestamp();
+        return $couple;
     }
 }
