@@ -14,32 +14,35 @@ final class Finder
         $this->people = $a_people;
     }
 
-    public function find(int $ft): F
+    public function find(int $ft): PeopleComparison
     {
-        /** @var F[] $tr */
+        /** @var PeopleComparison[] $tr */
         $tr = [];
 
         for ($i = 0; $i < count($this->people); $i++) {
             for ($j = $i + 1; $j < count($this->people); $j++) {
-                $r = new F();
+                $current_people_comparison = new PeopleComparison();
+
+                $first_person = $this->people[$i];
+                $second_person = $this->people[$j];
 
                 if ($this->isFirstPersonMoreYoungerThanSecondPerson($i, $j)) {
-                    $r->first_person = $this->people[$i];
-                    $r->second_person = $this->people[$j];
+                    $current_people_comparison->setFirstPerson($first_person);
+                    $current_people_comparison->setSecondPerson($second_person);
                 } else {
-                    $r->first_person = $this->people[$j];
-                    $r->second_person = $this->people[$i];
+                    $current_people_comparison->setFirstPerson($second_person);
+                    $current_people_comparison->setSecondPerson($first_person);
                 }
 
-                $r->birthday_difference = $r->second_person->birthDate->getTimestamp()
-                    - $r->first_person->birthDate->getTimestamp();
+                $current_people_comparison->setBirthdayDifference($current_people_comparison->secondPerson()->birthDate()->getTimestamp()
+                    - $current_people_comparison->firstPerson()->birthDate()->getTimestamp());
 
-                $tr[] = $r;
+                $tr[] = $current_people_comparison;
             }
         }
 
-        if (count($tr) < 1) {
-            return new F();
+        if (empty($tr)) {
+            return new PeopleComparison();
         }
 
         $answer = $tr[0];
@@ -47,13 +50,13 @@ final class Finder
         foreach ($tr as $result) {
             switch ($ft) {
                 case FT::ONE:
-                    if ($result->birthday_difference < $answer->birthday_difference) {
+                    if ($result->birthdayDifference() < $answer->birthdayDifference()) {
                         $answer = $result;
                     }
                     break;
 
                 case FT::TWO:
-                    if ($result->birthday_difference > $answer->birthday_difference) {
+                    if ($result->birthdayDifference() > $answer->birthdayDifference()) {
                         $answer = $result;
                     }
                     break;
@@ -63,8 +66,8 @@ final class Finder
         return $answer;
     }
 
-    private function isFirstPersonMoreYoungerThanSecondPerson($first_person, $second_person): bool
+    private function isFirstPersonMoreYoungerThanSecondPerson($first_person_index, $second_person_index): bool
     {
-        return $this->people[$first_person]->birthDate < $this->people[$second_person]->birthDate;
+        return $this->people[$first_person_index]->birthDate() < $this->people[$second_person_index]->birthDate();
     }
 }
