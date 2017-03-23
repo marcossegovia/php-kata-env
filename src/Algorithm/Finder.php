@@ -9,57 +9,51 @@ final class Finder
     /** @var Person[] */
     private $people;
 
+    /** @var Couple[] */
+    private $couples;
+
     public function __construct(array $people)
     {
-        $this->people = $people;
+        $this->people  = $people;
+        $this->couples = $this->getCouples($people);
     }
 
     public function findByBirthdaysDistance(int $find_criteria): Couple
     {
-        /** @var Couple[] $all_possible_couples */
-        $all_possible_couples = [];
-
-        for ($i = 0; $i < count($this->people); $i++) {
-            for ($j = $i + 1; $j < count($this->people); $j++) {
-                $couple = new Couple();
-
-                if ($this->people[$i]->birthDate() < $this->people[$j]->birthDate()) {
-                    $couple->younger = $this->people[$i];
-                    $couple->older      = $this->people[$j];
-                } else {
-                    $couple->younger = $this->people[$j];
-                    $couple->older      = $this->people[$i];
-                }
-
-                $couple->birthday_distance_in_seconds = $couple->older->birthDate()->getTimestamp()
-                    - $couple->younger->birthDate()->getTimestamp();
-
-                $all_possible_couples[] = $couple;
-            }
+        if (empty($this->couples)) {
+            return new CoupleEmpty();
         }
 
-        if (count($all_possible_couples) < 1) {
-            return new Couple();
-        }
+        $selected_couple = $this->couples[0];
 
-        $answer = $all_possible_couples[0];
-
-        foreach ($all_possible_couples as $result) {
+        foreach ($this->couples as $couple) {
             switch ($find_criteria) {
                 case FindByBirthdaysCriteria::CLOSEST_BIRTHDAY:
-                    if ($result->birthday_distance_in_seconds < $answer->birthday_distance_in_seconds) {
-                        $answer = $result;
+                    if ($couple->birthday_distance_in_seconds < $selected_couple->birthday_distance_in_seconds) {
+                        $selected_couple = $couple;
                     }
                     break;
 
                 case FindByBirthdaysCriteria::FURTHEST_BIRTHDAY:
-                    if ($result->birthday_distance_in_seconds > $answer->birthday_distance_in_seconds) {
-                        $answer = $result;
+                    if ($couple->birthday_distance_in_seconds > $selected_couple->birthday_distance_in_seconds) {
+                        $selected_couple = $couple;
                     }
                     break;
             }
         }
 
-        return $answer;
+        return $selected_couple;
+    }
+
+    private function getCouples(array $people): array
+    {
+        $couples = [];
+        for ($i = 0; $i < count($people); $i++) {
+            for ($j = $i + 1; $j < count($people); $j++) {
+                $couples[] = new Couple($people[$i], $people[$j]);
+            }
+        }
+
+        return $couples;
     }
 }

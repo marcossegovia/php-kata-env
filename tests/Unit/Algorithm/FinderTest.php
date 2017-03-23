@@ -39,8 +39,8 @@ final class FinderTest extends TestCase
 
         $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::CLOSEST_BIRTHDAY);
 
-        $this->assertEquals(null, $couple->younger);
-        $this->assertEquals(null, $couple->older);
+        $this->assertEquals(null, $couple->younger());
+        $this->assertEquals(null, $couple->older());
     }
 
     /** @test */
@@ -52,8 +52,8 @@ final class FinderTest extends TestCase
 
         $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::CLOSEST_BIRTHDAY);
 
-        $this->assertEquals(null, $couple->younger);
-        $this->assertEquals(null, $couple->older);
+        $this->assertEquals(null, $couple->younger());
+        $this->assertEquals(null, $couple->older());
     }
 
     /** @test */
@@ -66,8 +66,8 @@ final class FinderTest extends TestCase
 
         $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::CLOSEST_BIRTHDAY);
 
-        $this->assertEquals($this->sue, $couple->younger);
-        $this->assertEquals($this->greg, $couple->older);
+        $this->assertEquals($this->sue, $couple->younger());
+        $this->assertEquals($this->greg, $couple->older());
     }
 
     /** @test */
@@ -80,8 +80,8 @@ final class FinderTest extends TestCase
 
         $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::FURTHEST_BIRTHDAY);
 
-        $this->assertEquals($this->greg, $couple->younger);
-        $this->assertEquals($this->mike, $couple->older);
+        $this->assertEquals($this->greg, $couple->younger());
+        $this->assertEquals($this->mike, $couple->older());
     }
 
     /** @test */
@@ -96,8 +96,8 @@ final class FinderTest extends TestCase
 
         $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::FURTHEST_BIRTHDAY);
 
-        $this->assertEquals($this->sue, $couple->younger);
-        $this->assertEquals($this->sarah, $couple->older);
+        $this->assertEquals($this->sue, $couple->younger());
+        $this->assertEquals($this->sarah, $couple->older());
     }
 
     /**
@@ -114,7 +114,7 @@ final class FinderTest extends TestCase
 
         $couple = $finder->findByBirthdaysDistance(FindByBirthdaysCriteria::CLOSEST_BIRTHDAY);
 
-        $this->assertEquals($this->sue, $couple->younger);
-        $this->assertEquals($this->greg, $couple->older);
+        $this->assertEquals($this->sue, $couple->younger());
+        $this->assertEquals($this->greg, $couple->older());
     }
 }
