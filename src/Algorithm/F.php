@@ -7,11 +7,11 @@ namespace Kata\Algorithm;
 final class F
 {
     /** @var Person */
-    public $p1;
+    public $first_person;
 
     /** @var Person */
-    public $p2;
+    public $second_person;
 
     /** @var int */
-    public $d;
+    public $birthday_difference;
 }
