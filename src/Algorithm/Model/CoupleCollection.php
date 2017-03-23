@@ -1,6 +1,6 @@
 <?php
 
-namespace Kata\Algorithm;
+namespace Kata\Algorithm\Model;
 
 class CoupleCollection implements \Iterator, \Countable, \ArrayAccess
 {

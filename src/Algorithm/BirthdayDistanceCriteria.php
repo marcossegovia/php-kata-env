@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace Kata\Algorithm;
 
+use Kata\Algorithm\Model\Couple;
+
 final class BirthdayDistanceCriteria
 {
     const CLOSEST_BIRTHDAY = 1;
