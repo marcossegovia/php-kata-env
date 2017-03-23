@@ -24,38 +24,25 @@ final class Finder
             for ($j = $index + 1; $j < count($this->people); $j++)
             {
                 $person_to_compare_with = $this->people[$j];
-                $current_couple                 = $this->sortFromOlderToYounger($person, $person_to_compare_with);
+                $current_couple         = $this->sortFromOlderToYounger($person, $person_to_compare_with);
 
                 $sorted_people_from_older_to_younger[] = $current_couple;
             }
         }
 
-        if (count($sorted_people_from_older_to_younger) < 1)
+        if (empty($sorted_people_from_older_to_younger))
         {
             return new Comparator();
         }
 
         $first_couple = $sorted_people_from_older_to_younger[0];
 
+        $sorting_algorithm = $sorting_type == 1 ? SortClosest::class : SortFurthest::class;
         foreach ($sorted_people_from_older_to_younger as $current_couple)
         {
-            switch ($sorting_type)
-            {
-                case Sorting::SORT_CLOSEST_FIRST:
-                    if ($current_couple->age_difference < $first_couple->age_difference)
-                    {
-                        $first_couple = $current_couple;
-                    }
-                    break;
-
-                case Sorting::SORT_FURTHEST_FIRST:
-                    if ($current_couple->age_difference > $first_couple->age_difference)
-                    {
-                        $first_couple = $current_couple;
-                    }
-                    break;
-            }
+            $first_couple = (new $sorting_algorithm())->__invoke($current_couple, $first_couple);
         }
+
         return $first_couple;
     }
 
