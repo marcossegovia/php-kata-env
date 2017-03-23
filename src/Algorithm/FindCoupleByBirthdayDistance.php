@@ -7,13 +7,9 @@ namespace Kata\Algorithm;
 use Kata\Algorithm\Model\Couple;
 use Kata\Algorithm\Model\CoupleCollection;
 use Kata\Algorithm\Model\CoupleEmpty;
-use Kata\Algorithm\Model\Person;
 
 final class FindCoupleByBirthdayDistance
 {
-    /** @var Person[] */
-    private $people;
-
     /** @var CoupleCollection */
     private $couples;
 
@@ -22,7 +18,6 @@ final class FindCoupleByBirthdayDistance
 
     public function __construct(array $people)
     {
-        $this->people  = $people;
         $this->couples = CoupleCollection::buildAllPossibleCouplesFromPeopleArray($people);
     }
 

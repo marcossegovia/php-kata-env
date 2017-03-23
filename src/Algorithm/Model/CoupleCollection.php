@@ -30,7 +30,6 @@ class CoupleCollection implements \Iterator, \Countable, \ArrayAccess
         }
 
         return new self($couples);
-
     }
 
     public function allItems()

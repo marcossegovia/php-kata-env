@@ -27,7 +27,7 @@ final class FindCoupleByBirthdayDistanceTest extends TestCase
     {
         $this->sue   = new Person("Sue", new \DateTime("1950-01-01"));
         $this->greg  = new Person("Greg", new \DateTime("1952-05-01"));
-        $this->sarah = new \Kata\Algorithm\Model\Person("Sarah", new \DateTime("1982-01-01"));
+        $this->sarah = new Person("Sarah", new \DateTime("1982-01-01"));
         $this->mike  = new Person("Mike", new \DateTime("1979-01-01"));
     }
 
