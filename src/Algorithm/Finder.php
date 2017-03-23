@@ -18,7 +18,23 @@ final class Finder
     {
         /** @var Couple[] $couple_array */
         $couple_array = [];
+        $couple_array = $this->sortPeople($couple_array);
 
+        $not_exists_any_couple = count($couple_array) < 1;
+
+        if ($not_exists_any_couple) {
+            return new Couple();
+        }
+
+        return $this->getCoupleResult($couple_type, $couple_array);
+    }
+
+    /**
+     * @param $couple_array
+     * @return array
+     */
+    private function sortPeople($couple_array): array
+    {
         for ($i = 0; $i < count($this->people); $i++) {
             for ($j = $i + 1; $j < count($this->people); $j++) {
 
@@ -37,11 +53,16 @@ final class Finder
                 $couple_array[] = $couple;
             }
         }
+        return $couple_array;
+    }
 
-        if (count($couple_array) < 1) {
-            return new Couple();
-        }
-
+    /**
+     * @param int $couple_type
+     * @param $couple_array
+     * @return mixed
+     */
+    private function getCoupleResult(int $couple_type, $couple_array)
+    {
         $answer = $couple_array[0];
 
         foreach ($couple_array as $couple_candidate) {
@@ -59,7 +80,6 @@ final class Finder
                     break;
             }
         }
-
         return $answer;
     }
 }
