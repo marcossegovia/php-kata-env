@@ -5,8 +5,8 @@ declare(strict_types = 1);
 namespace KataTest\Unit\Algorithm;
 
 use Kata\Algorithm\Finder;
-use Kata\Algorithm\Sorting;
 use Kata\Algorithm\Person;
+use Kata\Algorithm\Sorting;
 use PHPUnit\Framework\TestCase;
 
 final class FinderTest extends TestCase
@@ -25,21 +25,21 @@ final class FinderTest extends TestCase
 
     protected function setUp()
     {
-        $this->sue            = new Person();
-        $this->sue->name      = "Sue";
-        $this->sue->birthDate = new \DateTime("1950-01-01");
+        $this->sue = new Person();
+        $this->sue->setName("Sue");
+        $this->sue->setBirthDate(new \DateTime("1950-01-01"));
 
-        $this->greg            = new Person();
-        $this->greg->name      = "Greg";
-        $this->greg->birthDate = new \DateTime("1952-05-01");
+        $this->greg = new Person();
+        $this->greg->setName("Greg");
+        $this->greg->setBirthDate(new \DateTime("1952-05-01"));
 
-        $this->sarah            = new Person();
-        $this->sarah->name      = "Sarah";
-        $this->sarah->birthDate = new \DateTime("1982-01-01");
+        $this->sarah = new Person();
+        $this->sarah->setName("Sarah");
+        $this->sarah->setBirthDate(new \DateTime("1982-01-01"));
 
-        $this->mike            = new Person();
-        $this->mike->name      = "Mike";
-        $this->mike->birthDate = new \DateTime("1979-01-01");
+        $this->mike = new Person();
+        $this->mike->setName("Mike");
+        $this->mike->setBirthDate(new \DateTime("1979-01-01"));
     }
 
     /** @test */
