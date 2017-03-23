@@ -14,10 +14,10 @@ final class Finder
         $this->people = $a_people;
     }
 
-    public function find(int $ft): PeopleComparison
+    public function find(int $birthday_sort): PeopleComparison
     {
-        /** @var PeopleComparison[] $tr */
-        $tr = [];
+        /** @var PeopleComparison[] $people_comparisons */
+        $people_comparisons = [];
 
         for ($i = 0; $i < count($this->people); $i++) {
             for ($j = $i + 1; $j < count($this->people); $j++) {
@@ -37,25 +37,25 @@ final class Finder
                 $current_people_comparison->setBirthdayDifference($current_people_comparison->secondPerson()->birthDate()->getTimestamp()
                     - $current_people_comparison->firstPerson()->birthDate()->getTimestamp());
 
-                $tr[] = $current_people_comparison;
+                $people_comparisons[] = $current_people_comparison;
             }
         }
 
-        if (empty($tr)) {
+        if (empty($people_comparisons)) {
             return new PeopleComparison();
         }
 
-        $answer = $tr[0];
+        $answer = $people_comparisons[0];
 
-        foreach ($tr as $result) {
-            switch ($ft) {
-                case FT::ONE:
+        foreach ($people_comparisons as $result) {
+            switch ($birthday_sort) {
+                case BirthdaySort::CLOSEST:
                     if ($result->birthdayDifference() < $answer->birthdayDifference()) {
                         $answer = $result;
                     }
                     break;
 
-                case FT::TWO:
+                case BirthdaySort::FURTHEST:
                     if ($result->birthdayDifference() > $answer->birthdayDifference()) {
                         $answer = $result;
                     }

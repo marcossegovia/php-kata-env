@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace KataTest\Unit\Algorithm;
 
 use Kata\Algorithm\Finder;
-use Kata\Algorithm\FT;
+use Kata\Algorithm\BirthdaySort;
 use Kata\Algorithm\Person;
 use PHPUnit\Framework\TestCase;
 
@@ -48,7 +48,7 @@ final class FinderTest extends TestCase
         $list   = [];
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::ONE);
+        $result = $finder->find(BirthdaySort::CLOSEST);
 
         $this->assertEquals(null, $result->firstPerson());
         $this->assertEquals(null, $result->secondPerson());
@@ -61,7 +61,7 @@ final class FinderTest extends TestCase
         $list[] = $this->sue;
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::ONE);
+        $result = $finder->find(BirthdaySort::CLOSEST);
 
         $this->assertEquals(null, $result->firstPerson());
         $this->assertEquals(null, $result->secondPerson());
@@ -75,7 +75,7 @@ final class FinderTest extends TestCase
         $list[] = $this->greg;
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::ONE);
+        $result = $finder->find(BirthdaySort::CLOSEST);
 
         $this->assertEquals($this->sue, $result->firstPerson());
         $this->assertEquals($this->greg, $result->secondPerson());
@@ -89,7 +89,7 @@ final class FinderTest extends TestCase
         $list[] = $this->greg;
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::TWO);
+        $result = $finder->find(BirthdaySort::FURTHEST);
 
         $this->assertEquals($this->greg, $result->firstPerson());
         $this->assertEquals($this->mike, $result->secondPerson());
@@ -105,7 +105,7 @@ final class FinderTest extends TestCase
         $list[] = $this->greg;
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::TWO);
+        $result = $finder->find(BirthdaySort::FURTHEST);
 
         $this->assertEquals($this->sue, $result->firstPerson());
         $this->assertEquals($this->sarah, $result->secondPerson());
@@ -123,7 +123,7 @@ final class FinderTest extends TestCase
         $list[] = $this->greg;
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::ONE);
+        $result = $finder->find(BirthdaySort::CLOSEST);
 
         $this->assertEquals($this->sue, $result->firstPerson());
         $this->assertEquals($this->greg, $result->secondPerson());
