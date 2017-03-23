@@ -6,12 +6,12 @@ namespace Kata\Algorithm;
 
 final class Finder
 {
-    /** @var Thing[] */
-    private $_p;
+    /** @var Person[] */
+    private $people;
 
-    public function __construct(array $p)
+    public function __construct(array $people)
     {
-        $this->_p = $p;
+        $this->people = $people;
     }
 
     public function find(int $ft): F
@@ -19,20 +19,21 @@ final class Finder
         /** @var F[] $tr */
         $tr = [];
 
-        for ($i = 0; $i < count($this->_p); $i++) {
-            for ($j = $i + 1; $j < count($this->_p); $j++) {
+        for ($i = 0; $i < count($this->people); $i++) {
+            for ($j = $i + 1; $j < count($this->people); $j++) {
+
                 $r = new F();
 
-                if ($this->_p[$i]->birthDate < $this->_p[$j]->birthDate) {
-                    $r->p1 = $this->_p[$i];
-                    $r->p2 = $this->_p[$j];
+                if ($this->people[$i]->birthDate < $this->people[$j]->birthDate) {
+                    $r->younger_person = $this->people[$i];
+                    $r->older_person = $this->people[$j];
                 } else {
-                    $r->p1 = $this->_p[$j];
-                    $r->p2 = $this->_p[$i];
+                    $r->younger_person = $this->people[$j];
+                    $r->older_person = $this->people[$i];
                 }
 
-                $r->d = $r->p2->birthDate->getTimestamp()
-                    - $r->p1->birthDate->getTimestamp();
+                $r->age_difference = $r->older_person->birthDate->getTimestamp()
+                    - $r->younger_person->birthDate->getTimestamp();
 
                 $tr[] = $r;
             }
@@ -47,13 +48,13 @@ final class Finder
         foreach ($tr as $result) {
             switch ($ft) {
                 case FT::ONE:
-                    if ($result->d < $answer->d) {
+                    if ($result->age_difference < $answer->age_difference) {
                         $answer = $result;
                     }
                     break;
 
                 case FT::TWO:
-                    if ($result->d > $answer->d) {
+                    if ($result->age_difference > $answer->age_difference) {
                         $answer = $result;
                     }
                     break;

@@ -6,12 +6,12 @@ namespace Kata\Algorithm;
 
 final class F
 {
-    /** @var Thing */
-    public $p1;
+    /** @var Person */
+    public $younger_person;
 
-    /** @var Thing */
-    public $p2;
+    /** @var Person */
+    public $older_person;
 
     /** @var int */
-    public $d;
+    public $age_difference;
 }
