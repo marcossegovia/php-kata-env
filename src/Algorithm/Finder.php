@@ -46,13 +46,13 @@ final class Finder
 
         foreach ($couple_array as $couple_candidate) {
             switch ($couple_type) {
-                case FT::CLOSE:
+                case CoupleType::CLOSE:
                     if ($couple_candidate->age_difference < $answer->age_difference) {
                         $answer = $couple_candidate;
                     }
                     break;
 
-                case FT::FURTHER:
+                case CoupleType::FURTHER:
                     if ($couple_candidate->age_difference > $answer->age_difference) {
                         $answer = $couple_candidate;
                     }

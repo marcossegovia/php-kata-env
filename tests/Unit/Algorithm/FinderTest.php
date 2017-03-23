@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace KataTest\Unit\Algorithm;
 
 use Kata\Algorithm\Finder;
-use Kata\Algorithm\FT;
+use Kata\Algorithm\CoupleType;
 use Kata\Algorithm\Person;
 use PHPUnit\Framework\TestCase;
 
@@ -48,7 +48,7 @@ final class FinderTest extends TestCase
         $list   = [];
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::CLOSE);
+        $result = $finder->find(CoupleType::CLOSE);
 
         $this->assertEquals(null, $result->person_1);
         $this->assertEquals(null, $result->person_2);
@@ -61,7 +61,7 @@ final class FinderTest extends TestCase
         $list[] = $this->sue;
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::CLOSE);
+        $result = $finder->find(CoupleType::CLOSE);
 
         $this->assertEquals(null, $result->person_1);
         $this->assertEquals(null, $result->person_2);
@@ -75,7 +75,7 @@ final class FinderTest extends TestCase
         $list[] = $this->greg;
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::CLOSE);
+        $result = $finder->find(CoupleType::CLOSE);
 
         $this->assertEquals($this->sue, $result->person_1);
         $this->assertEquals($this->greg, $result->person_2);
@@ -89,7 +89,7 @@ final class FinderTest extends TestCase
         $list[] = $this->greg;
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::FURTHER);
+        $result = $finder->find(CoupleType::FURTHER);
 
         $this->assertEquals($this->greg, $result->person_1);
         $this->assertEquals($this->mike, $result->person_2);
@@ -105,7 +105,7 @@ final class FinderTest extends TestCase
         $list[] = $this->greg;
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::FURTHER);
+        $result = $finder->find(CoupleType::FURTHER);
 
         $this->assertEquals($this->sue, $result->person_1);
         $this->assertEquals($this->sarah, $result->person_2);
@@ -123,7 +123,7 @@ final class FinderTest extends TestCase
         $list[] = $this->greg;
         $finder = new Finder($list);
 
-        $result = $finder->find(FT::CLOSE);
+        $result = $finder->find(CoupleType::CLOSE);
 
         $this->assertEquals($this->sue, $result->person_1);
         $this->assertEquals($this->greg, $result->person_2);
