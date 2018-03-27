@@ -1,6 +1,6 @@
 <?php
 
-namespace KataTest\Integration;
+namespace Kata\Behat\Integration;
 
 use Behat\Behat\Context\Context;
 

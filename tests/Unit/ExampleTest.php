@@ -1,29 +1,14 @@
 <?php
 
-namespace KataTest\Unit;
+namespace Kata;
 
-use Kata\Example;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ExampleTest extends PHPUnit_Framework_TestCase
+class ExampleTest extends TestCase
 {
-    /** @var Example */
-    private $example;
-
     /** @test */
-    public function shouldExpectAJellyTimeWhenGreeting()
+    public function exampleShouldReturnJellytime()
     {
-        $this->havingAnExample();
-        $this->thenOnGreetingsShouldAssert("JellyTime");
-    }
-
-    public function havingAnExample()
-    {
-        return $this->example = new Example();
-    }
-
-    private function thenOnGreetingsShouldAssert($expected)
-    {
-        $this->assertEquals($expected, $this->example->greetings());
+        $this->assertEquals('JellyTime', (new Example())->greetings());
     }
 }

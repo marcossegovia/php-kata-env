@@ -1,6 +1,6 @@
 <?php
 
-namespace KataTest\Integration\Example\Context;
+namespace Kata\Behat\Integration\Example\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;

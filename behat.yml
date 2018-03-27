@@ -4,4 +4,4 @@ default:
             paths:
                 - "%paths.base%/tests/Integration/Example/Feature"
             contexts:
-                - KataTest\Integration\Example\Context\ExampleContext
+                - Kata\Behat\Integration\Example\Context\ExampleContext
