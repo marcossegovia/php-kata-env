@@ -25,8 +25,7 @@ abstract class LoadCostsDecorator
 
     private function next($a_load, $a_destination, $some_price_rules, $net_benefits, $costs)
     {
-        if (null === $this->next_load_cost)
-        {
+        if (null === $this->next_load_cost) {
             return -$costs;
         }
 

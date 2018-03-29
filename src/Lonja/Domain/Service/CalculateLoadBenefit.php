@@ -21,8 +21,7 @@ final class CalculateLoadBenefit
         $load_lines = $a_load->lines();
         $benefits   = 0;
 
-        foreach ($load_lines as $load_line)
-        {
+        foreach ($load_lines as $load_line) {
             $this->recalculateLoadLineBenefits($a_destination, $some_price_rules, $load_line, $benefits);
         }
 
@@ -39,16 +38,14 @@ final class CalculateLoadBenefit
      */
     private function recalculateLoadLineBenefits(Destination $a_destination, array $some_price_rules, LoadLine $load_line, float &$benefits): void
     {
-        foreach ($some_price_rules as $price_rule)
-        {
+        foreach ($some_price_rules as $price_rule) {
             $this->recalculateLoadLineBenefitsIfMatchPriceRules($a_destination, $load_line, $price_rule, $benefits);
         }
     }
 
     private function recalculateLoadLineBenefitsIfMatchPriceRules(Destination $a_destination, LoadLine $load_line, PriceRule $price_rule, float &$benefits): void
     {
-        if ($this->currentProductAndDestinationMatchPriceRule($a_destination, $load_line, $price_rule))
-        {
+        if ($this->currentProductAndDestinationMatchPriceRule($a_destination, $load_line, $price_rule)) {
             $benefits += $price_rule->price() * $load_line->kilograms();
         }
     }

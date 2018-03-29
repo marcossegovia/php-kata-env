@@ -29,16 +29,14 @@ final class CalculateBestDestination
     public function __invoke(Load $a_load, array $some_destinations, array $some_price_rules): Destination
     {
         $best_destination = $some_destinations[0];
-        foreach ($some_destinations as $destination)
-        {
+        foreach ($some_destinations as $destination) {
             $destination_benefits     = $this->load_benefit_calculator->__invoke($a_load, $destination, $some_price_rules);
             $destination_costs        = $this->load_cost_calculator->__invoke($a_load, $destination, $some_price_rules, $destination_benefits);
             $destination_net_benefits = $destination_benefits + $destination_costs;
 
             dump($destination->city() . ': Gross benefits > ' . $destination_benefits . ', Costs > ' . $destination_costs . ', Final: ' . $destination_net_benefits);
 
-            if (!isset($best_benefits) || $best_benefits < $destination_net_benefits)
-            {
+            if (!isset($best_benefits) || $best_benefits < $destination_net_benefits) {
                 $best_destination = $destination;
                 $best_benefits    = $destination_net_benefits;
             }
