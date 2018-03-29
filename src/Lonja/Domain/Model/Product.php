@@ -11,7 +11,7 @@ final class Product
         $this->name = $a_name;
     }
 
-    public function equals(self $a_product): bool
+    public function equals(Product $a_product): bool
     {
         return $this->name === $a_product->name;
     }
