@@ -1,4 +1,4 @@
-#php-kata-env
+# php-kata-env
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://travis-ci.org/uvinum/php-kata-env.svg?branch=master)](https://travis-ci.org/uvinum/php-kata-env)

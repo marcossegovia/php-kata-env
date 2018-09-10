@@ -10,7 +10,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": ">=7.1"
+        "php": ">=7.2"
     },
     "require-dev": {
         "behat/behat": "^3.4",
@@ -31,8 +31,8 @@
         }
     },
     "scripts": {
-        "test-unit": "phpunit",
-        "test-integration": "php vendor/bin/behat --suite example",
+        "test-unit": "vendor/bin/phpunit",
+        "test-integration": "vendor/bin/behat",
         "format": "phpcbf --standard=psr2 src/"
     },
     "minimum-stability": "stable",
