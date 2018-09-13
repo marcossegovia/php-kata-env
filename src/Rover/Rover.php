@@ -40,22 +40,53 @@ final class Rover
     private function process(string $command): void
     {
         if ('f' === $command) {
-            $this->coordinates = new Coordinates(
-                $this->coordinates->coordinateX(),
-                $this->coordinates->coordinateY() + 1
-            );
+            $this->coordinates = $this->moveForward();
         }
         if ('b' === $command) {
-            $this->coordinates = new Coordinates(
-                $this->coordinates->coordinateX(),
-                $this->coordinates->coordinateY() - 1
-            );
+            $this->coordinates = $this->moveBackwards();
         }
         if ('r' === $command) {
             $this->direction = $this->direction->turnRight();
         }
         if ('l' === $command) {
             $this->direction = $this->direction->turnLeft();
+        }
+    }
+
+    private function moveForward(): Coordinates
+    {
+        return $this->move($this->direction);
+    }
+
+    private function moveBackwards(): Coordinates
+    {
+        return $this->move($this->direction->inverseDirection());
+    }
+
+    private function move(Direction $a_direction): Coordinates
+    {
+        switch ($a_direction->direction()) {
+            case Direction::NORTH:
+                return new Coordinates(
+                    $this->coordinates->coordinateX(),
+                    $this->coordinates->coordinateY() + 1
+                );
+                break;
+            case Direction::SOUTH:
+                return new Coordinates(
+                    $this->coordinates->coordinateX(),
+                    $this->coordinates->coordinateY() - 1
+                );
+            case Direction::EAST:
+                return new Coordinates(
+                    $this->coordinates->coordinateX() + 1,
+                    $this->coordinates->coordinateY()
+                );
+            case Direction::WEST:
+                return new Coordinates(
+                    $this->coordinates->coordinateX() - 1,
+                    $this->coordinates->coordinateY()
+                );
         }
     }
 }

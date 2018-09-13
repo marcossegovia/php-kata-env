@@ -91,4 +91,38 @@ class DirectionTest extends TestCase
         $this->direction = $this->direction->turnLeft();
         $this->assertEquals(Direction::north(), $this->direction);
     }
+
+    /** @test */
+    public function shouldPointSouthWhenAskingForInverseDirection()
+    {
+        $this->direction = $this->direction->inverseDirection();
+        $this->assertEquals(Direction::south(), $this->direction);
+    }
+
+    /** @test */
+    public function shouldPointWestWhenAskingForInverseDirectionAfterTurningRight()
+    {
+        $this->direction = $this->direction->turnRight();
+        $this->direction = $this->direction->inverseDirection();
+        $this->assertEquals(Direction::west(), $this->direction);
+    }
+
+    /** @test */
+    public function shouldPointNorthWhenAskingForInverseDirectionAfterTurningRightTwice()
+    {
+        $this->direction = $this->direction->turnRight();
+        $this->direction = $this->direction->turnRight();
+        $this->direction = $this->direction->inverseDirection();
+        $this->assertEquals(Direction::north(), $this->direction);
+    }
+
+    /** @test */
+    public function shouldPointNorthWhenAskingForInverseDirectionAfterTurningRight3Times()
+    {
+        $this->direction = $this->direction->turnRight();
+        $this->direction = $this->direction->turnRight();
+        $this->direction = $this->direction->turnRight();
+        $this->direction = $this->direction->inverseDirection();
+        $this->assertEquals(Direction::east(), $this->direction);
+    }
 }

@@ -61,4 +61,40 @@ class RoverTest extends TestCase
         $this->assertEquals(new Coordinates(1, 1), $this->rover->coordinates());
         $this->assertEquals(Direction::west(), $this->rover->direction());
     }
+
+    /** @test
+     * @dataProvider commandsProvider
+     */
+    public function roverShouldBeAbleToProceedMultipleCommands(
+        array $commands,
+        Coordinates $expected_coordinates,
+        Direction $expected_direction
+    ): void
+    {
+        $this->rover->commands($commands);
+        $this->assertEquals($expected_coordinates, $this->rover->coordinates());
+        $this->assertEquals($expected_direction, $this->rover->direction());
+    }
+
+    public function commandsProvider(): array
+    {
+        return [
+            [
+                ['f', 'r', 'f'],
+                new Coordinates(2, 2),
+                Direction::east(),
+            ],
+            [
+                ['f', 'r', 'f', 'l', 'b'],
+                new Coordinates(2, 1),
+                Direction::north(),
+            ],
+            [
+                ['r', 'f', 'f', 'l', 'f', 'f', 'l', 'f', 'f', 'l', 'f', 'f'],
+                new Coordinates(1, 1),
+                Direction::south(),
+            ],
+        ];
+    }
+
 }

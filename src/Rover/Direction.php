@@ -37,22 +37,22 @@ final class Direction
 
     public static function north(): Direction
     {
-        return new self(Direction::NORTH);
+        return new self(self::NORTH);
     }
 
     public static function south(): Direction
     {
-        return new self(Direction::SOUTH);
+        return new self(self::SOUTH);
     }
 
     public static function east(): Direction
     {
-        return new self(Direction::EAST);
+        return new self(self::EAST);
     }
 
     public static function west(): Direction
     {
-        return new self(Direction::WEST);
+        return new self(self::WEST);
     }
 
     public function turnRight(): Direction
@@ -68,5 +68,30 @@ final class Direction
     public function direction(): string
     {
         return $this->direction;
+    }
+
+    public function inverseDirection(): Direction
+    {
+        if ($this->equals(self::north())) {
+            return self::south();
+        }
+        if ($this->equals(self::east())) {
+            return self::west();
+        }
+        if ($this->equals(self::south())) {
+            return self::north();
+        }
+        if ($this->equals(self::west())) {
+            return self::east();
+        }
+    }
+
+    private function equals(Direction $a_direction): bool
+    {
+        if ($this->direction === $a_direction->direction()) {
+            return true;
+        }
+
+        return false;
     }
 }
