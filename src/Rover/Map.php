@@ -47,4 +47,15 @@ final class Map
 
         return $a_coordinate;
     }
+
+    public function isObstacle(Coordinates $a_coordinate): bool
+    {
+        foreach ($this->obstacles as $current_obstacle) {
+            if ($a_coordinate->equals($current_obstacle)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

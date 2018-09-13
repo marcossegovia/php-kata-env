@@ -16,8 +16,7 @@ class RoverTest extends TestCase
     public function setUp()
     {
         $obstacles = [
-            new Coordinates(1, 1),
-            new Coordinates(3, 1)
+            new Coordinates(2, 2),
         ];
         $map = new Map(new Coordinates(10, 10), $obstacles);
 
@@ -80,13 +79,13 @@ class RoverTest extends TestCase
     {
         return [
             [
-                ['f', 'r', 'f'],
-                new Coordinates(2, 2),
+                ['f', 'f', 'r', 'f'],
+                new Coordinates(2, 3),
                 Direction::east(),
             ],
             [
-                ['f', 'r', 'f', 'l', 'b'],
-                new Coordinates(2, 1),
+                ['f', 'f', 'r', 'f', 'l', 'f', 'b'],
+                new Coordinates(2, 3),
                 Direction::north(),
             ],
             [
@@ -97,4 +96,10 @@ class RoverTest extends TestCase
         ];
     }
 
+    /** @test */
+    public function roverShouldReportObstacleWhenEncountering(): void
+    {
+        $this->rover->commands(['f', 'r', 'f']);
+        $this->assertEquals([new Coordinates(2, 2)], $this->rover->obstaclesFound());
+    }
 }

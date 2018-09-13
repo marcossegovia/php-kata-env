@@ -14,4 +14,4 @@ Develop an api that moves a rover around on a grid.
 * Implement commands that turn the rover left/right (l,r).
 * Implement wrapping from one edge of the grid to another. (As if it was a planet !)
 * Implement obstacle detection before each move to a new square. (That means report to the user)
-Optional: If a given sequence of commands encounters an obstacle, the rover moves up to the last possible point and reports the obstacle.
+Optional: If a given sequence of commands encounters an obstacle, the rover moves to the next command and reports the obstacle.

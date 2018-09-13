@@ -7,12 +7,14 @@ final class Rover
     private $map;
     private $coordinates;
     private $direction;
+    private $obstacles_found;
 
     public function __construct(Map $a_map, Coordinates $a_starting_point, Direction $a_direction)
     {
         $this->map = $a_map;
         $this->coordinates = $a_starting_point;
         $this->direction = $a_direction;
+        $this->obstacles_found = [];
     }
 
     public function map(): Map
@@ -67,26 +69,50 @@ final class Rover
     {
         switch ($a_direction->direction()) {
             case Direction::NORTH:
-                return new Coordinates(
+                $new_coordinates = new Coordinates(
                     $this->coordinates->coordinateX(),
                     $this->coordinates->coordinateY() + 1
                 );
-                break;
+                if (!$this->map->isObstacle($new_coordinates)) {
+                    return $new_coordinates;
+                }
+                $this->obstacles_found[] = $new_coordinates;
+                return $this->coordinates;
             case Direction::SOUTH:
-                return new Coordinates(
+                $new_coordinates = new Coordinates(
                     $this->coordinates->coordinateX(),
                     $this->coordinates->coordinateY() - 1
                 );
+                if (!$this->map->isObstacle($new_coordinates)) {
+                    return $new_coordinates;
+                }
+                $this->obstacles_found[] = $new_coordinates;
+                return $this->coordinates;
             case Direction::EAST:
-                return new Coordinates(
+                $new_coordinates = new Coordinates(
                     $this->coordinates->coordinateX() + 1,
                     $this->coordinates->coordinateY()
                 );
+                if (!$this->map->isObstacle($new_coordinates)) {
+                    return $new_coordinates;
+                }
+                $this->obstacles_found[] = $new_coordinates;
+                return $this->coordinates;
             case Direction::WEST:
-                return new Coordinates(
+                $new_coordinates = new Coordinates(
                     $this->coordinates->coordinateX() - 1,
                     $this->coordinates->coordinateY()
                 );
+                if (!$this->map->isObstacle($new_coordinates)) {
+                    return $new_coordinates;
+                }
+                $this->obstacles_found[] = $new_coordinates;
+                return $this->coordinates;
         }
+    }
+
+    public function obstaclesFound(): array
+    {
+        return $this->obstacles_found;
     }
 }
