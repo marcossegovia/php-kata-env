@@ -102,4 +102,39 @@ class RoverTest extends TestCase
         $this->rover->commands(['f', 'r', 'f']);
         $this->assertEquals([new Coordinates(2, 2)], $this->rover->obstaclesFound());
     }
+
+    /** @test
+     * @dataProvider commandsSurpassLimitsProvider
+     */
+    public function roverShouldBeRelocatedWithinMapWhenSurpassTheMapLimits(
+        array $commands,
+        Coordinates $expected_coordinates,
+        Direction $expected_direction): void
+    {
+        $this->rover->commands($commands);
+        $this->assertEquals($expected_coordinates, $this->rover->coordinates());
+        $this->assertEquals($expected_direction, $this->rover->direction());
+
+    }
+
+    public function commandsSurpassLimitsProvider(): array
+    {
+        return [
+            [
+                ['f', 'f', 'f', 'f', 'f', 'f', 'f', 'f', 'f', 'f'],
+                new Coordinates(1, 1),
+                Direction::north(),
+            ],
+            [
+                ['l', 'f', 'f', 'f'],
+                new Coordinates(8, 1),
+                Direction::west(),
+            ],
+            [
+                ['l', 'f', 'f', 'f', 'r', 'b', 'b', 'b'],
+                new Coordinates(8, 8),
+                Direction::north(),
+            ]
+        ];
+    }
 }

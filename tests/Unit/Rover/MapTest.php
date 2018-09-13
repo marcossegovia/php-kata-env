@@ -37,6 +37,8 @@ class MapTest extends TestCase
             new Coordinates(3, 1),
             new Coordinates(20, 20),
             new Coordinates(12, 12),
+            new Coordinates(-1, 1),
+            new Coordinates(-1, -1),
         ];
         $this->map = new Map(new Coordinates(10, 10), $obstacles);
         $this->assertEquals([
@@ -44,6 +46,8 @@ class MapTest extends TestCase
             new Coordinates(3, 1),
             new Coordinates(10, 10),
             new Coordinates(2, 2),
+            new Coordinates(9, 1),
+            new Coordinates(9, 9),
         ], $this->map->obstacles());
     }
 }

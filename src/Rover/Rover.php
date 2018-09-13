@@ -73,6 +73,7 @@ final class Rover
                     $this->coordinates->coordinateX(),
                     $this->coordinates->coordinateY() + 1
                 );
+                $new_coordinates = $this->map->normalizeCoordinate($new_coordinates);
                 if (!$this->map->isObstacle($new_coordinates)) {
                     return $new_coordinates;
                 }
@@ -83,6 +84,7 @@ final class Rover
                     $this->coordinates->coordinateX(),
                     $this->coordinates->coordinateY() - 1
                 );
+                $new_coordinates = $this->map->normalizeCoordinate($new_coordinates);
                 if (!$this->map->isObstacle($new_coordinates)) {
                     return $new_coordinates;
                 }
@@ -93,6 +95,7 @@ final class Rover
                     $this->coordinates->coordinateX() + 1,
                     $this->coordinates->coordinateY()
                 );
+                $new_coordinates = $this->map->normalizeCoordinate($new_coordinates);
                 if (!$this->map->isObstacle($new_coordinates)) {
                     return $new_coordinates;
                 }
@@ -103,6 +106,7 @@ final class Rover
                     $this->coordinates->coordinateX() - 1,
                     $this->coordinates->coordinateY()
                 );
+                $new_coordinates = $this->map->normalizeCoordinate($new_coordinates);
                 if (!$this->map->isObstacle($new_coordinates)) {
                     return $new_coordinates;
                 }

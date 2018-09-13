@@ -26,7 +26,7 @@ final class Map
         return $some_obstacles;
     }
 
-    private function normalizeCoordinate(Coordinates $a_coordinate): Coordinates
+    public function normalizeCoordinate(Coordinates $a_coordinate): Coordinates
     {
         if ($a_coordinate->coordinateX() > $this->max_coordinates->coordinateX()) {
             return $this->normalizeCoordinate(
@@ -41,6 +41,24 @@ final class Map
                 new Coordinates(
                     $a_coordinate->coordinateX(),
                     $a_coordinate->coordinateY() - $this->max_coordinates->coordinateY()
+                )
+            );
+        }
+
+        if ($a_coordinate->coordinateX() < 0) {
+            return $this->normalizeCoordinate(
+                new Coordinates(
+                    $this->max_coordinates->coordinateX() - abs($a_coordinate->coordinateX()),
+                    $a_coordinate->coordinateY()
+                )
+            );
+        }
+
+        if ($a_coordinate->coordinateY() < 0) {
+            return $this->normalizeCoordinate(
+                new Coordinates(
+                    $a_coordinate->coordinateX(),
+                    $this->max_coordinates->coordinateY() - abs($a_coordinate->coordinateY())
                 )
             );
         }
