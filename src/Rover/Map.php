@@ -30,14 +30,16 @@ final class Map
     {
         if ($a_coordinate->coordinateX() > $this->max_coordinates->coordinateX()) {
             return $this->normalizeCoordinate(
-                new Coordinates($a_coordinate->coordinateX() - $this->max_coordinates->coordinateX(),
+                new Coordinates(
+                    $a_coordinate->coordinateX() - $this->max_coordinates->coordinateX(),
                     $a_coordinate->coordinateY()
                 )
             );
         }
         if ($a_coordinate->coordinateY() > $this->max_coordinates->coordinateY()) {
             return $this->normalizeCoordinate(
-                new Coordinates($a_coordinate->coordinateX(),
+                new Coordinates(
+                    $a_coordinate->coordinateX(),
                     $a_coordinate->coordinateY() - $this->max_coordinates->coordinateY()
                 )
             );
