@@ -1,36 +1,17 @@
-# php-kata-env
+Mars Rover Kata
+===============
 
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://travis-ci.org/uvinum/php-kata-env.svg?branch=master)](https://travis-ci.org/uvinum/php-kata-env)
-[![Code Coverage](https://scrutinizer-ci.com/g/uvinum/php-kata-env/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/uvinum/php-kata-env/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/uvinum/php-kata-env/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/uvinum/php-kata-env/?branch=master)
+This code is a part of the [Java Tutorial Through Katas: Mars Rover](http://technologyconversations.com/2014/10/17/java-tutorial-through-katas-mars-rover/) article published on [Technology Conversations](http://technologyconversations.com/) article.
 
-Uvinum skeleton repository to start with our coding katas.
+Description
+-----------
 
-## Clone the repository
+Develop an api that moves a rover around on a grid.
 
-``` bash
-$ git clone git@github.com:uvinum/php-kata-env.git
-```
-
-## Unit Testing
-
-``` bash
-$ composer test-unit
-```
-
-## Integration Testing
-
-``` bash
-$ composer test-integration
-```
-
-## Format to PS2
-
-``` bash
-$ composer format
-```
-
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+* You are given the initial starting point (x,y) of a rover and the direction (N,S,E,W) it is facing.
+* The rover receives a character array of commands.
+* Implement commands that move the rover forward/backward (f,b).
+* Implement commands that turn the rover left/right (l,r).
+* Implement wrapping from one edge of the grid to another. (As if it was a planet !)
+* Implement obstacle detection before each move to a new square. (That means report to the user)
+Optional: If a given sequence of commands encounters an obstacle, the rover moves to the next command and reports the obstacle.

@@ -1,8 +1,8 @@
 {
-    "name": "uvinum/php-kata-env",
+    "name": "marcossegovia/rover-kata",
     "type": "project",
-    "description": "Uvinum skeleton repository to start with our coding katas.",
-    "homepage": "https://github.com/uvinum/php-kata-env",
+    "description": "Mars Rover kata",
+    "homepage": "https://github.com/marcossegovia/rover-kata",
     "keywords": [
         "kata",
         "uvinum",
@@ -32,7 +32,6 @@
     },
     "scripts": {
         "test-unit": "vendor/bin/phpunit",
-        "test-integration": "vendor/bin/behat",
         "format": "phpcbf --standard=psr2 src/"
     },
     "minimum-stability": "stable",

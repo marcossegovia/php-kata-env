@@ -1,7 +1,2 @@
 default:
     suites:
-        example:
-            paths:
-                - "%paths.base%/tests/Integration/Example/Feature"
-            contexts:
-                - Kata\Behat\Integration\Example\Context\ExampleContext
